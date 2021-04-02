@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-6 ">
+         </div>
+    <div class="row-login col-md-4 offset-md-1">
+        <mdb-card>
+            <mdb-card-header class="info-color white-text text-center py-4">
+                <h5>
+                    <strong><i class='fas fa-user'></i>Login</strong>
+                </h5>
+            </mdb-card-header>
+            <mdb-card-body class="px-lg-5 pt-0 ">
+                <form >
+                    <div class="md-form form-sm">
+                        <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
+                        <input type="email" id="form22" mdbInput [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" />
+                        <label for="form22">Your email</label>
+                       
+
+                    </div>
+
+                    <div class="md-form form-sm">
+                        <mdb-icon fas icon="lock" class="prefix "></mdb-icon>
+                        <input mdbInput type="password" id="form23" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+                        <label for="form23">Your password</label>
+                        
+                    </div>
+                </form>
+                <div class="text-center mb-3">
+                    <button type="button" mdbBtn gradient="blue" block="true" rounded="true"
+                        class="z-depth-1a waves-light" mdbWavesEffect (click)="login()">Sign in
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Not a Member?
+                            <a routerLink="/signup" class="blue-text">Sign Up</a>
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p>
+                            Forgot
+                            <a href="#" class="blue-text">Password?</a>
+                        </p>
+                    </div>
+                </div>
+                {{token}}
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>
+</div>
