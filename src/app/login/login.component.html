@@ -10,27 +10,32 @@
                 </h5>
             </mdb-card-header>
             <mdb-card-body class="px-lg-5 pt-0 ">
-                <form >
-                    <div class="md-form form-sm">
+                <form #userForm="ngForm"  novalidate *ngIf ="!submitted">
+                    <div class="md-form form-sm form-group">
                         <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
-                        <input type="email" id="form22" mdbInput [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" />
+                        <input type="email" id="form22" mdbInput [class.is-invalid]="name.invalid && name.touched"  required #name="ngModel" name='email' [(ngModel)]="email"  class="form-control" />
                         <label for="form22">Your email</label>
+                        <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
                        
 
                     </div>
 
                     <div class="md-form form-sm">
                         <mdb-icon fas icon="lock" class="prefix "></mdb-icon>
-                        <input mdbInput type="password" id="form23" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+                        <input mdbInput type="password" id="form23" class="form-control" [class.is-invalid]="pass.invalid && pass.touched"  required #pass='ngModel' name='pass' [(ngModel)]="password" />
                         <label for="form23">Your password</label>
+                        <small class="text-danger" [class.d-none]="pass.valid || pass.untouched">password is required</small>
+                       
                         
                     </div>
+                    <p class="text-danger">{{errMsg}}</p>
+                    <div class="text-center mb-3">
+                        <button [disabled]="userForm.form.invalid" type="button" mdbBtn gradient="blue" block="true" rounded="true"
+                            class="z-depth-1a waves-light" (click)="login()" mdbWavesEffect >Sign in
+                        </button>
+                    </div>
                 </form>
-                <div class="text-center mb-3">
-                    <button type="button" mdbBtn gradient="blue" block="true" rounded="true"
-                        class="z-depth-1a waves-light" mdbWavesEffect (click)="login()">Sign in
-                    </button>
-                </div>
+                 
                 <div class="row">
                     <div class="col-6">
                         <p>Not a Member?
@@ -44,7 +49,7 @@
                         </p>
                     </div>
                 </div>
-                {{token}}
+               
             </mdb-card-body>
         </mdb-card>
     </div>

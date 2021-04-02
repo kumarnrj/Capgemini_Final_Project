@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   public password:String;
   
   token:string;
+  errMsg:string;
+
+  submitted = false;
 
 
   constructor(private auth:AuthenticationService,private http:HttpClient) {
@@ -28,7 +31,10 @@ export class LoginComponent implements OnInit {
            
            this.token=res.jwt;
     },
-    err=>this.token=err.error)
+    err=>{
+      if(err.status==404){
+        this.errMsg = err.error + " Email or Password is wrong!"
+      }})
 
       //  this.http.post("http://localhost:8100/authenticate",{
       //    username:this.email,
