@@ -9,12 +9,14 @@ import {HttpClientModule} from '@angular/common/http'
 // For Cascading Modal only
 import { TabsModule } from 'ng-uikit-pro-standard';
 import { SignupComponent } from './signup/signup.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
