@@ -3,6 +3,7 @@ import { FormControl, FormGroup,Validators,FormBuilder } from '@angular/forms';
 import {PasswordValidator} from '../shared/password.validator';
 
 import {AuthenticationService} from '../authentication.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -10,7 +11,10 @@ import {AuthenticationService} from '../authentication.service'
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private fb:FormBuilder){}
+  formSubmitted=false;
+  public otp;
+
+  constructor(private fb:FormBuilder,private auth:AuthenticationService,private router:Router){}
   ngOnInit() {}
 
 
@@ -21,7 +25,7 @@ export class SignupComponent implements OnInit {
     email:['',[Validators.required,Validators.email]],
     password:['',[Validators.required,Validators.pattern("^(?=.*\\d)(?=.*[a-z])(?=.*[@$!%*#?&])(?=.*[A-Z])(?!.*\\s).{8,}$")]],
     repassword:[''],
-    mobile:['',[Validators.required,Validators.pattern('^\\d{10}$')]],
+    phone:['',[Validators.required,Validators.pattern('^\\d{10}$')]],
     address:this.fb.group({
       pincode:['',[Validators.required,Validators.pattern('^\\d{6}$')]],
       city:['',Validators.required],
@@ -51,7 +55,7 @@ export class SignupComponent implements OnInit {
  }
 
  get mobile(){
-  return this.registrationForm.get('mobile');
+  return this.registrationForm.get('phone');
  }
 
  get pincode(){
@@ -65,6 +69,26 @@ export class SignupComponent implements OnInit {
  }
  get street(){
   return this.registrationForm.get('address.street')
+ }
+
+ verifyOtp(){
+   this.auth.verityOtp(this.otp).subscribe(res=>console.log(res))
+ }
+ onSubmit(){
+   
+   console.log("hello")
+   this.auth.sendOtp(this.registrationForm.value.email)
+   .subscribe(res=>{
+    this.formSubmitted=true
+    //this.router.navigate(["verify"])
+   })
+   
+   
+  //  this.auth.registerUser(this.registrationForm.value).subscribe(res=>console.log(res),
+  //   err=>{
+  //     if(err.status==400)
+  //        alert("Email is already present")
+  //   })
  }
 
    // calling the register user servie to store the data 

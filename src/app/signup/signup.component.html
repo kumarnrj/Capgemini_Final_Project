@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="!formSubmitted" class="container-fluid">
     <div class="row ">
         <div class="col-5 ">
         </div>
@@ -11,7 +11,7 @@
                 </mdb-card-header>
                 <mdb-card-body class="px-lg-5 pt-0 ">
                     {{registrationForm.value| json}}
-                    <form [formGroup]="registrationForm">
+                    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="md-form form-sm">
@@ -87,8 +87,7 @@
                                 formControlName="repassword" />
                             <label for="form26">Confirm Password</label>
                             <mdb-error *ngIf="
-                              registrationForm.invalid &&
-                              (confirmPassword.dirty || confirmPassword.touched)
+                              registrationForm.invalid
                             ">
                                <p *ngIf="registrationForm.errors?.misMatch" class="text-danger">mismatch</p>
                             </mdb-error>
@@ -97,7 +96,7 @@
                         <div class="md-form form-sm">
                             <mdb-icon fas icon="phone" class="prefix"></mdb-icon>
                             <input mdbInput mdbValidate type="tel" id="form27" class="form-control"
-                                formControlName="mobile" />
+                                formControlName="phone" />
                             <label for="form27">Phone</label>
                             <mdb-error *ngIf="
                             mobile.invalid &&
@@ -161,15 +160,15 @@
                             </div>
 
                         </div>
-
+                        <div class="text-center mb-3">
+                            <button [disabled]="!registrationForm.valid" type="submit" mdbBtn gradient="blue" block="true"
+                                rounded="true" class="z-depth-1a waves-light"  mdbWavesEffect>Sign in
+                            </button>
+                        </div>
 
                     </form>
 
-                    <div class="text-center mb-3">
-                        <button [disabled]="!registrationForm.valid" type="button" mdbBtn gradient="blue" block="true"
-                            rounded="true" class="z-depth-1a waves-light" (click)="signup()" mdbWavesEffect>Sign in
-                        </button>
-                    </div>
+                  
                     <div class="options text-right">
                         <p class="pt-1">
                             Already have an account?
@@ -181,4 +180,35 @@
             </mdb-card>
         </div>
     </div>
+</div>
+<div *ngIf="formSubmitted" class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 row-verify  ">
+    <div class="col-md-12">
+        <mdb-card>
+            <mdb-card-body class="px-lg-5 pt-5  ">
+                <form>
+               
+                <div class="alert alert-success" role="alert">
+                  OTP has been sent to your email id enter to verify account
+                  {{otp}}
+                </div>
+                    <div class="md-form form-sm ">
+                        <mdb-icon fas icon="key" class="prefix"></mdb-icon>
+                        <input type="text" id="form22" mdbInput   class="form-control" [(ngModel)]='otp'  [ngModelOptions]="{standalone: true}"/>
+                        <label for="form22">Enter OTP</label>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button  type="button" mdbBtn gradient="blue" block="true" rounded="true"
+                            class="z-depth-1a waves-light" (click)="verifyOtp()" mdbWavesEffect >verify
+                        </button>
+                    </div>
+                </form>
+
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>
+</div>
 </div>

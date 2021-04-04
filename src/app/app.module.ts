@@ -10,13 +10,17 @@ import {HttpClientModule} from '@angular/common/http'
 import { TabsModule } from 'ng-uikit-pro-standard';
 import { SignupComponent } from './signup/signup.component';
 import { TestComponent } from './test/test.component';
+import { VerifyUserComponent } from './verify-user/verify-user.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    TestComponent
+    TestComponent,
+    VerifyUserComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

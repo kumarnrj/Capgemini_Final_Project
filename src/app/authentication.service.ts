@@ -14,7 +14,9 @@ export class AuthenticationService {
 
   private _url="http://localhost:8100/authenticate";
   private userUrl="http://localhost:8100/user-service/addUser"
-
+  private testUrl="http://localhost:8081/addUser";
+  private emailUrl="http://localhost:8100/email-service/sendOtp";
+  private testEmailUrl="http://localhost:8080/sendOtp"
   constructor(private http:HttpClient) { }
 
   //authenticate the use
@@ -27,19 +29,19 @@ export class AuthenticationService {
 
    
    // adding or registering the user
-   registerUser(firstName:String,lastName:String,email:String,password:String,mobile:String,pincode:String,city:String,stateAd:String,street:String){
-    let user:User;
-    user ={ name:firstName+" "+lastName,
-    email:email,
-    password:password,
-    phone:mobile,
-    address:{
-      pincode:pincode,
-      city:city,
-    state:stateAd,
-    street:street
-    }}
+   registerUser(user:User){
+    return this.http.post(this.testUrl,user)
+   }
 
-    return this.http.post(this.userUrl,user)
+   // send OTP to the user
+   sendOtp(email:String){
+     return this.http.post(this.testEmailUrl,{
+       email:email
+     })
+   }
+   verityOtp(otp){
+     return this.http.post("http://localhost:8080/verify-otp",{
+       otp:otp
+   })
    }
 }
