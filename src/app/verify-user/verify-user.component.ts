@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
-
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-verify-user',
   templateUrl: './verify-user.component.html',
@@ -16,7 +16,7 @@ export class VerifyUserComponent implements OnInit {
   }
 
   verifyOtp(){
-        this.auth.verityOtp(this.otp).subscribe(res=>console.log(res));
+        this.auth.verityOtp(this.otp).subscribe(res=>swal.fire("Done","Verified","success"));
   }
 
 }

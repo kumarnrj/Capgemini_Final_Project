@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup,Validators,FormBuilder } from '@angular/forms';
 import {PasswordValidator} from '../shared/password.validator';
-
+import swal from 'sweetalert2';
 import {AuthenticationService} from '../authentication.service'
 import { Router } from '@angular/router';
 @Component({
@@ -72,14 +72,21 @@ export class SignupComponent implements OnInit {
  }
 
  verifyOtp(){
-   this.auth.verityOtp(this.otp).subscribe(res=>console.log(res))
+   this.auth.verityOtp(this.otp).subscribe(res=>{
+     swal.fire("Done","Verified","success");
+    this.auth.registerUser(this.registrationForm.value).subscribe(res=>console.log(res),
+      err=>{
+        if(err.status==400)
+           swal.fire("Oops","Email is already present","error");
+      })
+   })
  }
  onSubmit(){
    
    console.log("hello")
    this.auth.sendOtp(this.registrationForm.value.email)
    .subscribe(res=>{
-    this.formSubmitted=true
+    this.formSubmitted=true;
     //this.router.navigate(["verify"])
    })
    

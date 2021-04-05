@@ -1,4 +1,7 @@
+import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgetPasswordComponent implements OnInit {
 
-  constructor() { }
+  public email:String;
+
+  constructor(private auth:AuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  SendOtp(){
+    console.log(this.email);
+       this.auth.sendOtp(this.email)
+       .subscribe(res=>{
+          this.router.navigate(["verify"]);
+       },
+       err=>console.log(err))
   }
 
 }

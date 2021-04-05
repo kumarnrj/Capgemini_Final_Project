@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { TestComponent } from './test/test.component';
 import { VerifyUserComponent } from './verify-user/verify-user.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     SignupComponent,
     TestComponent,
     VerifyUserComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
