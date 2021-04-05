@@ -81,36 +81,13 @@ export class SignupComponent implements OnInit {
       })
    })
  }
+
  onSubmit(){
-   
    console.log("hello")
    this.auth.sendOtp(this.registrationForm.value.email)
    .subscribe(res=>{
     this.formSubmitted=true;
-    //this.router.navigate(["verify"])
    })
-   
-   
-  //  this.auth.registerUser(this.registrationForm.value).subscribe(res=>console.log(res),
-  //   err=>{
-  //     if(err.status==400)
-  //        alert("Email is already present")
-  //   })
  }
-
-   // calling the register user servie to store the data 
-   signup(){
-    //console.log(this.registrationForm)
-  //   this.auth.registerUser(this.firstName,this.lastName,this.email,this.password,this.mobile,this.pincode,this.city,this.stateAd,this.street)
-  //   .subscribe(res=>console.log(res),
-  //              err=>console.log(err))
-  // }
   }
-
-  
-
- 
-
- 
-}
 

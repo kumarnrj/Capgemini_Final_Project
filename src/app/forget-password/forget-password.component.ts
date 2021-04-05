@@ -11,6 +11,7 @@ import { AuthenticationService } from '../authentication.service';
 export class ForgetPasswordComponent implements OnInit {
 
   public email:String;
+  public submitted;
 
   constructor(private auth:AuthenticationService,private router:Router) { }
 
@@ -21,6 +22,7 @@ export class ForgetPasswordComponent implements OnInit {
     console.log(this.email);
        this.auth.sendOtp(this.email)
        .subscribe(res=>{
+         this.auth.setUserEmail(this.email);
           this.router.navigate(["verify"]);
        },
        err=>console.log(err))
