@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup,Validators,FormBuilder } from '@angular/forms';
-import {PasswordValidator} from '../shared/password.validator';
+import {PasswordValidator} from '../../shared/password.validator';
 import swal from 'sweetalert2';
-import {AuthenticationService} from '../authentication.service'
+import {AuthenticationService} from '../../Services/authentication.service'
 import { Router } from '@angular/router';
+import {SpinnerInterceptorService} from '../../Interceptors/spinner-interceptor.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,7 +16,9 @@ export class SignupComponent implements OnInit {
   formSubmitted=false;
   public otp;
 
-  constructor(private fb:FormBuilder,private auth:AuthenticationService,private router:Router){}
+  constructor(private fb:FormBuilder,private auth:AuthenticationService,
+    private router:Router,
+    public loadService:SpinnerInterceptorService){}
   ngOnInit() {}
 
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validators } from '@angular/forms';
-import { AuthenticationService } from '../authentication.service';
-import {PasswordValidator} from '../shared/password.validator';
+import { AuthenticationService } from '../../Services/authentication.service';
+import {PasswordValidator} from '../../shared/password.validator';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -9,7 +11,7 @@ import {PasswordValidator} from '../shared/password.validator';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private auth:AuthenticationService) { }
+  constructor(private fb:FormBuilder,private auth:AuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +35,10 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.auth.getUserEmail());
 
     this.auth.changePassword(this.ChagnePasswordForm.value.password)
-    .subscribe(res=>console.log(res))
+    .subscribe(res=>{
+      swal.fire("Done","Your password has been changed","success");
+      this.router.navigate(["login"])
+    })
   }
 
 }

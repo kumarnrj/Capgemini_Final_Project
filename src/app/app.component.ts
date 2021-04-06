@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpinnerInterceptorService } from './Interceptors/spinner-interceptor.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app-carWash';
   
-  constructor(){}
+  constructor(public loadService:SpinnerInterceptorService){}
   
 
   ngOnInit(){} 
