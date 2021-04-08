@@ -38,24 +38,23 @@
       <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
           <a class="nav-link">
-            <mdb-icon fab icon="twitter"></mdb-icon>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <mdb-icon fab icon="google-plus"></mdb-icon>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">
-            <div class="btn-group" mdbDropdown>
-              <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div *ngIf=!loggedIn>
+            <mdb-icon fas icon="sign-in-alt"></mdb-icon>
+            <a class="text-light" routerLink="/login">Login</a>
+          </div>
+            
+            <div *ngIf=loggedIn class="btn-group" mdbDropdown>
+              <mdb-icon fas icon="user fa-lg" mdbDropdownToggle></mdb-icon>
               <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" routerLink="/profile">My Profile</a>
                 <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+                <a class="dropdown-item" href="#">My Orders</a>
+                 <div class="divider dropdown-divider"></div>
+                 
+                <span  class="logoutIcon dropdown-item" (click)="logout()"><mdb-icon  fas icon="sign-out-alt" style="color: #1B98F5;"></mdb-icon>LogOut</span> 
+                
+              
+              
               </div>
             </div>
           </a>

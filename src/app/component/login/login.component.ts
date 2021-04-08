@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../Services/authentication.service'
-
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,18 +19,25 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
 
-  constructor(private auth:AuthenticationService,private http:HttpClient) {
+  constructor(private auth:AuthenticationService,private http:HttpClient
+    ,private router:Router) {
 
    }
 
   ngOnInit(): void {
+    console.log(this.auth.isUserLoggedIn())
   }
 
   login(){
     this.auth.authenticateUser(this.email,this.password)
     .subscribe((res:any)=>{
-           
+           swal.fire("Done","Logged In","success");
            this.token=res.jwt;
+           localStorage.setItem("token",this.token);
+           localStorage.setItem("email",this.email.toString())
+           this.auth.setUserEmail(this.email);
+           this.router.navigate(['/']);
+          
     },
     err=>{
       if(err.status==404){
@@ -42,5 +50,9 @@ export class LoginComponent implements OnInit {
       //  }).toPromise().then(res=>console.log(res),
       //                      err=>console.log(err))
   }
+
+
+ 
+  
 
 }

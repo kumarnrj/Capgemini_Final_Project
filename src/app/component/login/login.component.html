@@ -23,7 +23,9 @@
                     <div class="md-form form-sm">
                         <mdb-icon fas icon="lock" class="prefix "></mdb-icon>
                         <input mdbInput type="password" id="form23" class="form-control" [class.is-invalid]="pass.invalid && pass.touched"  required #pass='ngModel' name='pass' [(ngModel)]="password" />
+                        <!-- <span toggle="#form23" class="fa fa-fw fa-eye field-icon toggle-password"></span> -->
                         <label for="form23">Your password</label>
+                        
                         <small class="text-danger" [class.d-none]="pass.valid || pass.untouched">password is required</small>
                        
                         

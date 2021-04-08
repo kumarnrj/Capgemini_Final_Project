@@ -15,6 +15,7 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
 import { LoaderInterceptorService } from './Interceptors/loader-interceptor.service';
 import { ProfileComponent } from './component/profile/profile.component';
+import { MyOrdresComponent } from './my-ordres/my-ordres.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     VerifyUserComponent,
     ForgetPasswordComponent,
     ChangePasswordComponent,
-    ProfileComponent
+    ProfileComponent,
+    MyOrdresComponent
   ],
   imports: [
     BrowserModule,

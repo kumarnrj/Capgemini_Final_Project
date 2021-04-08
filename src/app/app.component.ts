@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SpinnerInterceptorService } from './Interceptors/spinner-interceptor.service';
-
+import {AuthenticationService} from './Services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,25 @@ import { SpinnerInterceptorService } from './Interceptors/spinner-interceptor.se
 })
 export class AppComponent {
   title = 'app-carWash';
-  
-  constructor(public loadService:SpinnerInterceptorService){}
+  public loggedIn;
+  constructor(public loadService:SpinnerInterceptorService,
+      private auth:AuthenticationService,
+      private router:Router){
+        
+      }
   
 
-  ngOnInit(){} 
-  
+  ngOnInit(){
+    this.loggedIn = this.auth.isUserLoggedIn();
+    console.log(this.auth.isUserLoggedIn())
+   
+  } 
 
-  
+logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    this.ngOnInit()
+    this.router.navigate(['login'])
+}
 }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {User} from './User';
+import {UserDetails} from './UserDetails';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,13 @@ export class AuthenticationService {
   private testEmailUrl="http://localhost:8080/sendOtp"
   constructor(private http:HttpClient) { }
 
+   // getting the user data 
+   getUserData(email:String):Observable<UserDetails>{
+     console.log("inside it");
+     let url = "http://localhost:8081/findByEmail/"+email;
+     return  this.http.get<UserDetails>(url);
+   }
+
   //authenticate the use
    authenticateUser(email:String,password:String){
           return  this.http.post(this._url,{
@@ -33,7 +41,12 @@ export class AuthenticationService {
    
    // adding or registering the user
    registerUser(user:User){
-    return this.http.post(this.testUrl,user)
+    return this.http.post(this.testUrl+"/addUser",user);
+   }
+
+   // updating the user 
+   updateUser(user:User,userId){
+     return this.http.put(this.testUrl+"/"+userId,user);
    }
 
    // send OTP to the user
@@ -42,6 +55,8 @@ export class AuthenticationService {
        email:email
      })
    }
+
+   // verify the otp entered by user
    verityOtp(otp){
      return this.http.post("http://localhost:8080/verify-otp",{
        otp:otp
@@ -58,7 +73,6 @@ export class AuthenticationService {
     })
   }
 
-
    // getter and setter for userEmail
    getUserEmail():String{
      return this.userEmail;
@@ -66,6 +80,11 @@ export class AuthenticationService {
 
    setUserEmail(email:String){
     this.userEmail=email;
+   }
+
+   // To check if the user is loggedIn or not
+   isUserLoggedIn(){
+     return !!localStorage.getItem("token");
    }
 
    //getter and setter for otp is verified or not

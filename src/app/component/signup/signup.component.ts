@@ -78,7 +78,10 @@ export class SignupComponent implements OnInit {
  verifyOtp(){
    this.auth.verityOtp(this.otp).subscribe(res=>{
      swal.fire("Done","Verified","success");
-    this.auth.registerUser(this.registrationForm.value).subscribe(res=>console.log(res),
+    this.auth.registerUser(this.registrationForm.value).subscribe(res=>{
+      console.log(res)
+      this.router.navigate(["login"]);
+    },
       err=>{
         if(err.status==400)
            swal.fire("Oops","Email is already present","error");
