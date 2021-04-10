@@ -1,0 +1,100 @@
+<div class="container mt-4">
+  <div>
+    <mdb-breadcrumb customClass="white-text black lighten-4">
+      <mdb-breadcrumb-item>
+        <a routerLink="/">Home</a>
+      </mdb-breadcrumb-item>
+      <mdb-breadcrumb-item>
+        <a routerLink="/myaccount/myorders">My Order</a>
+      </mdb-breadcrumb-item>
+      <mdb-breadcrumb-item class="active">
+        <mdb-icon fas icon="angle-double-right" class="mr-1"></mdb-icon> {{id}}
+      </mdb-breadcrumb-item>
+    </mdb-breadcrumb>
+  </div>
+
+  <div>
+    <div class="card mt-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <p class="font-weight-bold">Washing Address</p>
+            <p >{{OrderDetail?.customerName}}</p>
+            <Address>{{OrderDetail?.address.street}}</Address>
+            <p class="font-weight-bold">Phone: </p><span>{{OrderDetail?.phone}}</span>
+            <vl></vl>
+          </div>
+
+          <div class="col">
+            <p>Car Name</p>
+            <small>Car Number</small>
+            <br>
+            <small>Washer: washer</small>
+          </div>
+          <div class="col">
+            <p><i class="fas fa-rupee-sign"></i>Payment status</p>
+          </div>
+          <div *ngIf="paymentStatus" class="mt-5 mr-4">
+            <span type="button" class="text-info"><i class="fa fa-download mr-2 " aria-hidden="true"></i>
+              <strong>Download Invoice</strong></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order status  -->
+  <div>
+    <div class="card mt-3 ">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <p> <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Package Name</p>
+          </div>
+          <div class="col-md-6">
+            <div class="row px-3">
+              <div class="col">
+                <ul id="progressbar">
+  
+                  <ng-container [ngSwitch]="status">
+                    <div *ngSwitchCase="'PENDING'">
+                      <li class="step0 active" id="step1">PLACED</li>
+                      <li class="step0  text-center" id="step2">PROCESSING</li>
+                      <li class="step0 text-muted text-right" id="step3">WASHED</li>
+                    </div>
+                    <div *ngSwitchCase="'PROCESSING'">
+                      <li class="step0 active" id="step1">PLACED</li>
+                      <li class="step0 active text-center" id="step2">PROCESSING</li>
+                      <li class="step0 text-muted text-right" id="step3">WASHED</li>
+                    </div>
+                    <div *ngSwitchCase="'COMPLETED'">
+                      <li class="step0 active" id="step1">PLACED</li>
+                      <li class="step0 active text-center" id="step2">PROCESSING</li>
+                      <li class="step0 active text-muted text-right" id="step3">WASHED</li>
+                    </div>
+                    <div *ngSwitchCase="'CANCELED'">
+                      <p ><i class="fas fa-times-circle mr-2 " style="color: red;" aria-hidden="true"></i>Cancel
+                        <br>
+                        <small>Your order has been canceled</small>
+                      </p>
+  
+                    </div>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+  
+  
+          </div>
+          <div class="mt-4">
+            <a href="#" class="text-info px-3 "><i class="fa fa-star mr-2" aria-hidden="true"></i><strong >Rate and Review
+                Service</strong></a>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>

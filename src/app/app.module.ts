@@ -15,7 +15,9 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
 import { LoaderInterceptorService } from './Interceptors/loader-interceptor.service';
 import { ProfileComponent } from './component/profile/profile.component';
-import { MyOrdresComponent } from './my-ordres/my-ordres.component';
+import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { MyOrdresComponent } from './my-ordres/my-ordres.component';
     ForgetPasswordComponent,
     ChangePasswordComponent,
     ProfileComponent,
-    MyOrdresComponent
+    MyOrdresComponent,
+    PageNotFoundComponent,
+    OrdersDetailComponent
   ],
   imports: [
     BrowserModule,

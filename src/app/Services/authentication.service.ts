@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import { Orders } from './Orders';
 import {User} from './User';
 import {UserDetails} from './UserDetails';
 @Injectable({
@@ -21,6 +22,9 @@ export class AuthenticationService {
   private testUrl="http://localhost:8081";
   private emailUrl="http://localhost:8100/email-service/sendOtp";
   private testEmailUrl="http://localhost:8080/sendOtp"
+  private testOrderUrl="http://localhost:8082/api/"
+
+
   constructor(private http:HttpClient) { }
 
    // getting the user data 
@@ -71,6 +75,17 @@ export class AuthenticationService {
       email:this.userEmail,
       newPassword:newPassword
     })
+  }
+
+  // Getting the orders list 
+  getCustomerOrderList(customerId):Observable<Orders[]>{
+      return this.http.get<Orders[]>(`${this.testOrderUrl}customer/${customerId}`);
+  }
+  
+
+  // Getting order by orderId
+  getOrderById(orderId:string):Observable<Orders>{
+    return this.http.get<Orders>(`${this.testOrderUrl}/${orderId}`);
   }
 
    // getter and setter for userEmail
