@@ -18,6 +18,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
+import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OrdersDetailComponent } from './component/orders-detail/orders-detail.c
     ProfileComponent,
     MyOrdresComponent,
     PageNotFoundComponent,
-    OrdersDetailComponent
+    OrdersDetailComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

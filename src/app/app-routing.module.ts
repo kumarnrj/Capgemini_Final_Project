@@ -11,6 +11,7 @@ import {UserLoggedIn,Profileactive} from './Services/LoggedInUser.guard';
 import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
+import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'myaccount/profile',component:ProfileComponent,canActivate:[Profileactive]},
   {path:'myaccount/myorders',component:MyOrdresComponent},
   {path:'myaccount/myorders/:id',component:OrdersDetailComponent},
+  {path:'adminDashboard',component:AdminDashboardComponent},
   {path:'**',component:PageNotFoundComponent},
 
 ];
