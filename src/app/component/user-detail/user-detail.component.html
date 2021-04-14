@@ -1,41 +1,95 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="my-card">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img class="rounded-circle" src="assets/img/images.png" alt="img" />
-                    </div>
-                    <div class="col">
-                        Hello,<br>
-                        <p style="font-weight: bold;">{{user}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="my-card">
-                <div class="row ">
-                    <div class="col-md-8 my-order ">
-                        <mdb-icon fas icon="folder" class="cyan-text fa-lg"></mdb-icon>
-                        <span routerLink="/myaccount/myorders" class="my-order-span font-weight-bold ">My Orders</span>
-                    </div>
-                </div>
-            </div>
+<div class="container mt-5 mb-5">
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">{{role}} Detials</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a class="text-success" (click)="addUser()">
+                        <mdb-icon mdbTooltip="Add {{role}}" fas icon="plus" size="2x"></mdb-icon>
+                    </a>
+                </span>
+                
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    
+                    <tr>
+                        <th class="text-center">Sr.No</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Mobile No</th>
+                        <th class="text-center">State</th>
+                        <th class="text-center">City</th>
+                        <th class="text-center">Street</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                    
+                    <tr *ngFor="let user of userList; let id = index" >
+                       <td>{{id+1}}</td>
+                        <td>
+                            {{user?.firstName}} {{user?.lastName}}
+                        </td>
+                        <td>
+                            {{user?.email}}
+                        </td>
+                        <td>
+                            {{user?.phone}}
+                        </td>
+                        <td>
+                            {{user?.address?.state}}
+                        </td>
+                        <td>
+                            {{user?.address?.city}}
+                        </td>
+                        <td>
+                            {{user?.address?.street}}
+                        </td>
+                        <td>
+                            <span class="table-up">
+                                <a class="indigo-text">
 
+                                    <mdb-icon mdbTooltip="Edit Details" fas icon="edit" (click)="edit(user)"></mdb-icon>
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="table-up">
+                                <a class="text-danger">
 
+                                    <mdb-icon mdbTooltip="Remove" fas icon="trash-alt" (click)="remove(id,user._id)"></mdb-icon>
+                                </a>
+                            </span>
+                        </td>
+               
+                    </tr>
+               
+                </table>
+            
+            </div>
         </div>
-        <div class="col-md-8">
-
-            <div class="my-card1">
-
-                <div>
-                    <span class="font-weight-bold">Personal Information</span>
-                    <span *ngIf="NameFields" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
-                        (click)="onPersonalInfo()">Edit</span>
-                    <span *ngIf="!NameFields" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
-                        (click)="onPersonalInfoCan()">Cancel</span>
-                </div>
+    </div>
+   
+</div>
 
 
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div *ngIf="!isAddButtonPressed" class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Update User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="isAddButtonPressed" class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
                 <form [formGroup]="EditForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-md-5">
@@ -77,13 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <span class="font-weight-bold">Email address</span>
-                        <span *ngIf="EmailField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
-                            (click)="onEmail()">Edit</span>
-                        <span *ngIf="!EmailField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
-                            (click)="onEmailCan()">Cancel</span>
-                    </div>
+                    
                     <div class="md-form form-sm">
                         <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
                         <input mdbInput mdbValidate type="email" id="form24" class="form-control"
@@ -99,19 +147,17 @@
                                 email</p>
                         </mdb-error>
                     </div>
-
-
-                    <div>
-                        <span class="font-weight-bold">Mobile</span>
-                        <span *ngIf="MobileField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
-                            (click)="onMobile()">Edit</span>
-                        <span *ngIf="!MobileField" class="font-weight-bold ml-5"
-                            style="color: #1B98F5; cursor: pointer;" (click)="onMobileCan()">Cancel</span>
+                    <div class="md-form form-sm">
+                        <mdb-icon fas icon="lock" class="prefix"></mdb-icon>
+                        <input mdbInput mdbValidate type="password" id="form25" class="form-control"
+                            formControlName="password" />
+                        <label for="form25">Your password</label>
+                        <mdb-error *ngIf="password.invalid &&(password.dirty || password.touched)">
+                            <p *ngIf="password.errors?.required" class="text-danger">password is required</p>
+                            <p *ngIf="password.errors?.pattern" class="text-danger">Must contain One Uppercase letter and special char(@,%,&...) and should be minimum length of 8 </p>
+                        </mdb-error>
+                       
                     </div>
-
-
-
-
                     <div class="md-form form-sm">
                         <mdb-icon fas icon="phone" class="prefix"></mdb-icon>
                         <input mdbInput mdbValidate type="tel" id="form27" class="form-control"
@@ -130,14 +176,7 @@
 
                     </div>
                     <div formGroupName="address">
-                        <div>
-
-                            <span class="font-weight-bold">Address</span>
-                            <span *ngIf="addressField" class="font-weight-bold ml-5"
-                                style="color: #1B98F5; cursor: pointer;" (click)="onAddress()">Edit</span>
-                            <span *ngIf="!addressField" class="font-weight-bold ml-5"
-                                style="color: #1B98F5; cursor: pointer;" (click)="onAddressCan()">Cancel</span>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-4">
                                 <div class="md-form form-sm">
@@ -189,25 +228,24 @@
                         <div class="row">
                             <div class="col-md-5 ">
                                 <div class="text-center mb-5 ">
-                                    <button [disabled]="!EditForm.valid" type="submit" mdbBtn gradient="purple" block="true" rounded="true"
-                                        class="z-depth-1a waves-light" mdbWavesEffect>Save Changes
+                                    <button *ngIf="!isAddButtonPressed" [disabled]="!EditForm.valid" type="submit" mdbBtn gradient="purple" block="true" rounded="true"
+                                        class="z-depth-1a waves-light" mdbWavesEffect>Update
+                                    </button>
+                                    <button *ngIf="isAddButtonPressed" [disabled]="!EditForm.valid" type="submit" mdbBtn gradient="purple" block="true" rounded="true"
+                                        class="z-depth-1a waves-light" mdbWavesEffect>Add
                                     </button>
                                 </div>
 
                             </div>
                             <div class="col-md-5">
                                 <button type="button" mdbBtn gradient="peach" block="true" rounded="true"
-                                    class="z-depth-1a waves-light" (click)="onCancel()" mdbWavesEffect>Cancel
+                                    class="z-depth-1a waves-light" (click)="frame.hide()" mdbWavesEffect>Cancel
                                 </button>
                             </div>
                         </div>
                     </div>
-
                 </form>
-
             </div>
-
         </div>
     </div>
-
 </div>

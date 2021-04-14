@@ -6,7 +6,8 @@ export interface UserDetails{
     lastName:String,
     email:String,
     password:String,
-    phone:String
+    phone:String,
+    role:String,
     address:Address
 }
 

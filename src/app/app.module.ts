@@ -19,6 +19,8 @@ import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashb
     MyOrdresComponent,
     PageNotFoundComponent,
     OrdersDetailComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    UserDetailComponent,
+    WasherDashboardComponent
   ],
   imports: [
     BrowserModule,

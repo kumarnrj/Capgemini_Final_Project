@@ -19,7 +19,7 @@ export class AuthenticationService {
 
   private _url="http://localhost:8100/authenticate";
   private userUrl="http://localhost:8100/user-service/addUser"
-  private testUrl="http://localhost:8081";
+  private testUrl="http://localhost:8081/api/";
   private emailUrl="http://localhost:8100/email-service/sendOtp";
   private testEmailUrl="http://localhost:8080/sendOtp"
   private testOrderUrl="http://localhost:8082/api/"
@@ -30,7 +30,7 @@ export class AuthenticationService {
    // getting the user data 
    getUserData(email:String):Observable<UserDetails>{
      console.log("inside it");
-     let url = "http://localhost:8081/findByEmail/"+email;
+     let url = "http://localhost:8081/api/findByEmail/"+email;
      return  this.http.get<UserDetails>(url);
    }
 
@@ -45,12 +45,28 @@ export class AuthenticationService {
    
    // adding or registering the user
    registerUser(user:User){
-    return this.http.post(this.testUrl+"/addUser",user);
+    return this.http.post(this.testUrl+"addUser",user);
    }
 
    // updating the user 
    updateUser(user:User,userId){
      return this.http.put(this.testUrl+"/"+userId,user);
+   }
+
+   // Deleting the user from the database based on the userId
+   removeUser(userId:String){
+     return this.http.delete(`${this.testUrl}deleteUser/${userId}`);
+   }
+
+   // Getting all the orders
+   getAllOrders(){
+     return this.http.get(this.testOrderUrl);
+   }
+
+   // getting all the users
+   getAllUser():Observable<UserDetails[]>{
+     console.log("inside all user")
+     return this.http.get<UserDetails[]>(this.testUrl);
    }
 
    // send OTP to the user

@@ -12,10 +12,12 @@ import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
-  {path:'login',component:LoginComponent,canActivate:[UserLoggedIn]},
+  {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent,canActivate:[UserLoggedIn]},
   {path:'verify',component:VerifyUserComponent},
   {path:'forgetPassword',component:ForgetPasswordComponent},
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path:'myaccount/myorders',component:MyOrdresComponent},
   {path:'myaccount/myorders/:id',component:OrdersDetailComponent},
   {path:'adminDashboard',component:AdminDashboardComponent},
+  {path:'adminDashboard/:user',component:UserDetailComponent},
+  {path:'washerDashboard',component:WasherDashboardComponent},
   {path:'**',component:PageNotFoundComponent},
 
 ];
