@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
-import {Orders} from '../../Services/Orders';
+import {Orders} from '../../Modals/Orders';
 import {AuthenticationService} from '../../Services/authentication.service';
 import swal from 'sweetalert2';
 import { delay, startWith } from 'rxjs/operators';

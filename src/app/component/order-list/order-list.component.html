@@ -1,0 +1,91 @@
+<div class="container mt-5 mb-5">
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Order Detials</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    
+                    <tr>
+                        <th class="text-center">Sr.No</th>
+                        <th class="text-center">Cust Name</th>
+                        <th class="text-center">Washer Name</th>
+                        <th class="text-center">WashingType</th>
+                        <th class="text-center">WashingDate</th>
+                        <th class="text-center">WashingTime</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                        <th class="text-center">View Details</th>
+                    </tr>
+                    
+                    <tr *ngFor="let order of orderList;let id=index" >
+                       <td>{{id+1}}</td>
+                        <td>
+                            {{order?.customerName}}
+                        </td>
+                        <td>
+                            {{order?.washerName}}
+                        </td>
+                        <td>
+                           {{order?.washingType}}
+                        </td>
+                        <td>
+                           {{order?.washingDate}}
+                        </td>
+                        <td>
+                           {{order?.time}}
+                        </td>
+                        <td>
+
+                            <ng-container [ngSwitch]=order?.status>
+                                <div *ngSwitchCase="'PENDING'">
+                                    <mdb-badge pill="true" warning="true">Pending</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'PROCESSING'">
+                                    <mdb-badge pill="true" info="true">Processing</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'COMPLETED'">
+                                    <mdb-badge pill="true" success="true">Completed</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'CANCELED'">
+                                    <mdb-badge pill="true" danger="true">canceled</mdb-badge>
+                                    
+                                </div>
+                           </ng-container>
+                           
+                        </td>
+                        <td>
+                            <span class="table-up">
+                                <a class="text-success">
+
+                                    <mdb-icon (click)="acceptOrder(order)" mdbTooltip="Accept" fas icon="check" size="2x" ></mdb-icon>
+            
+                                </a>
+                            </span>
+                            <span class="table-up ml-4">
+                                <a class="text-danger">
+
+                                    <mdb-icon (click)="rejectOrder(order)" mdbTooltip="Reject" fas icon="times" size="2x" ></mdb-icon>
+            
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+                            <a>
+                                <mdb-badge pill="true" color="teal" >
+                                <mdb-icon mdbTooltip="View Info"  fas icon="info" size="2x"></mdb-icon>
+                                </mdb-badge>
+                            </a>
+                        </td>
+                    </tr>
+               
+                </table>
+            
+            </div>
+        </div>
+    </div>
+   
+</div>
+<a mdbBtn gradient="aqua" (click)="onClick()" mdbWavesEffect>click</a>
+
+

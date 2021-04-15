@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router'
-import { Orders } from 'src/app/Services/Orders';
+import {ActivatedRoute, Router} from '@angular/router'
+import { Orders } from '../../Modals/Orders';
 import {AuthenticationService} from '../../Services/authentication.service';
 @Component({
   selector: 'app-orders-detail',
@@ -15,11 +15,13 @@ export class OrdersDetailComponent implements OnInit {
 
   OrderDetail:Orders;
   constructor(private route:ActivatedRoute,
-              private auth:AuthenticationService) { }
+              private auth:AuthenticationService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
     console.log(this.id);
+  
     
     setTimeout(
       ()=>{

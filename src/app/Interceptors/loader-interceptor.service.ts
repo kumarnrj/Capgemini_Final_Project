@@ -12,7 +12,13 @@ export class LoaderInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let loadService =  this.injector.get(SpinnerInterceptorService)
     loadService.isLoading.next(true);
-
+    let t = localStorage.getItem("token");
+    
+    let token = req.clone({
+      setHeaders:{
+        Authorization:'Bearer '+t
+      }
+    })
     return next.handle(req).pipe(
       finalize(
         ()=>{

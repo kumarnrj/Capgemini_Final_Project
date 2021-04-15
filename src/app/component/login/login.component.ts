@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../Services/authentication.service'
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { User } from 'src/app/Modals/User';
+import { UserDetails } from 'src/app/Modals/UserDetails';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   public email:String;
   public password:String;
+  private currentUser:UserDetails;
   
   token:string;
   errMsg:string;
@@ -36,8 +39,14 @@ export class LoginComponent implements OnInit {
            localStorage.setItem("token",this.token);
            localStorage.setItem("email",this.email.toString())
            this.auth.setUserEmail(this.email);
-           this.router.navigate(['/']);
-          
+           // getting the user from the database
+           this.auth.getUserData(this.email).subscribe( (res:any)=>{
+                  this.currentUser = res;
+                  localStorage.setItem("id",this.currentUser._id.toString());
+                  localStorage.setItem("ROLE",this.currentUser.role.toString());
+           })
+           
+           this.router.navigate(['/']); 
     },
     err=>{
       if(err.status==404){

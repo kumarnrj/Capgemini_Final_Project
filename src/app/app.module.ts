@@ -21,6 +21,8 @@ import { OrdersDetailComponent } from './component/orders-detail/orders-detail.c
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
 import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
+import { OrderListComponent } from './component/order-list/order-list.component';
+import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { WasherDashboardComponent } from './component/washer-dashboard/washer-da
     OrdersDetailComponent,
     AdminDashboardComponent,
     UserDetailComponent,
-    WasherDashboardComponent
+    WasherDashboardComponent,
+    OrderListComponent,
+    ReviewAndRatingComponent
   ],
   imports: [
     BrowserModule,

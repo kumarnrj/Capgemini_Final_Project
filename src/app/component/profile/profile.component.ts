@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { User } from 'src/app/Services/User';
-import { UserDetails } from 'src/app/Services/UserDetails';
+import { User } from '../../Modals/User';
+import { UserDetails } from '../../Modals/UserDetails';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 import swal from 'sweetalert2';
 @Component({

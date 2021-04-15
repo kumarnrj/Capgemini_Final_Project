@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import { Orders } from './Orders';
-import {User} from './User';
-import {UserDetails} from './UserDetails';
+import { Orders } from '../Modals/Orders';
+import { Review } from '../Modals/Review';
+import {User} from '../Modals/User';
+import {UserDetails} from '../Modals/UserDetails';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,17 @@ export class AuthenticationService {
 
 
   constructor(private http:HttpClient) { }
+
+  // testing jwt 
+  t = localStorage.getItem("token");
+   token = "Bearer "+this.t;
+   header = new HttpHeaders().set("Authorization",this.token);
+
+  
+  getuser(){
+    return this.http.get("http://localhost:8100/user-service/api/findByEmail/neeraj.neerajkumar11@gmail.com");
+  }
+
 
    // getting the user data 
    getUserData(email:String):Observable<UserDetails>{
@@ -58,10 +70,6 @@ export class AuthenticationService {
      return this.http.delete(`${this.testUrl}deleteUser/${userId}`);
    }
 
-   // Getting all the orders
-   getAllOrders(){
-     return this.http.get(this.testOrderUrl);
-   }
 
    // getting all the users
    getAllUser():Observable<UserDetails[]>{
@@ -93,18 +101,44 @@ export class AuthenticationService {
     })
   }
 
+
+//********************************* Order Service ****************************************** */
+
+   // Getting all the orders
+   getAllOrders(){
+    return this.http.get(this.testOrderUrl);
+  }
   // Getting the orders list 
   getCustomerOrderList(customerId):Observable<Orders[]>{
       return this.http.get<Orders[]>(`${this.testOrderUrl}customer/${customerId}`);
   }
   
-
   // Getting order by orderId
   getOrderById(orderId:string):Observable<Orders>{
-    return this.http.get<Orders>(`${this.testOrderUrl}/${orderId}`);
+    return this.http.get<Orders>(`${this.testOrderUrl}${orderId}`);
   }
 
-   // getter and setter for userEmail
+  // Getting the orders list by washerId
+  getWasherOrderList(washerId):Observable<Orders[]>{
+    return this.http.get<Orders[]>(`${this.testOrderUrl}washer/${washerId}`);
+  }
+
+  // update order details
+  updateOrder(order:Orders){
+    return this.http.put(`${this.testOrderUrl}updateOrder`,order);
+  }
+
+  //************************************************************************************** */
+   
+ // ******************************************* review Service *******************************
+ private testReviewUrl ="http://localhost:8083/api/";
+
+ getWasherReviewList(id):Observable<Review[]>{
+   return this.http.get<Review[]>(`${this.testReviewUrl}washerId/${id}`);
+ }
+ 
+  
+  // getter and setter for userEmail
    getUserEmail():String{
      return this.userEmail;
    }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, Validator } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
-import { UserDetails } from 'src/app/Services/UserDetails';
+import { UserDetails } from '../../Modals/UserDetails';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 import swal from 'sweetalert2';
 @Component({
@@ -49,7 +49,10 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.route.snapshot.paramMap.get("user");
-
+    
+    if(this.role=='Orders'){
+      this.router.navigate(["Dashboard/Orders"]);
+    }
     // calling the service to fetch the data from database
     setTimeout(() => {
       if (this.role === "users") {

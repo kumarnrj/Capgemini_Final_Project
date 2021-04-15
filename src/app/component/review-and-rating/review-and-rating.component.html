@@ -1,0 +1,110 @@
+
+<div class="container mt-5 mb-5 ">
+    <mdb-breadcrumb customClass="special-color white-text">
+        <mdb-breadcrumb-item routerLink="/">Home</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item (click)="Dashboard()" >Dashboard</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item class="active" >Review & Rating</mdb-breadcrumb-item>
+      </mdb-breadcrumb>
+    <div *ngFor="let review of ReviewList1 | slice:0:limit">
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm">
+                        <p class="font-weight-bold"> <i class="fa fa-user fa-lg" aria-hidden="true"></i> Customer Name</p>
+                       <p class="m-4"> {{review.customerName}}
+                           <br>
+            
+                        {{review?.customerEmail}}
+                       </p>
+                       
+                    </div>
+                    <div class="col-sm">
+                        <p class="font-weight-bold">Rating</p>
+                        <small>
+                            <ng-container [ngSwitch]="review.serviceRating">
+                                <div *ngSwitchCase="'1'">
+                                    <p>Service:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'2'">
+                                    <p>Service:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'3'">
+                                    <p>Service:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'4'">
+                                    <p>Service:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                    </p>
+                                    
+                                </div>
+                                <div *ngSwitchCase="'5'">
+                                    <p>Service:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                           </ng-container>
+                        </small>
+                      
+                        <small>
+                            <ng-container [ngSwitch]="review.serviceRating">
+                                <div *ngSwitchCase="'1'">
+                                    <p>Washer:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>   
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'2'">
+                                    <p>Washer:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'3'">
+                                    <p>Washer:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                      
+                                    </p>
+                                </div>
+                                <div *ngSwitchCase="'4'">
+                                    <p>Washer:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                      
+                                    </p>
+                                    
+                                </div>
+                                <div *ngSwitchCase="'5'">
+                                    <p>Washer:<i class="fas fa-star ml-1" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                        <i class="fas fa-star" style="color: #FF9529;" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                           </ng-container>
+                        </small>
+                    </div>
+                    <div class="col-sm">
+                        <p class="font-weight-bold"><i class="fas fa-comment fa-lg mr-2"></i>Review</p>
+                        <p class="ml-4">{{review?.review}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+  <a *ngIf="isListContainData" class="text-info float-right mb-2" (click)="showMore()" >Show More</a>
+</div>

@@ -14,6 +14,8 @@ import { OrdersDetailComponent } from './component/orders-detail/orders-detail.c
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
 import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
+import { OrderListComponent } from './component/order-list/order-list.component';
+import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -28,8 +30,9 @@ const routes: Routes = [
   {path:'adminDashboard',component:AdminDashboardComponent},
   {path:'adminDashboard/:user',component:UserDetailComponent},
   {path:'washerDashboard',component:WasherDashboardComponent},
+  {path:'Dashboard/Orders',component:OrderListComponent},
+  {path:'Reviews-Rating',component:ReviewAndRatingComponent},
   {path:'**',component:PageNotFoundComponent},
-
 ];
 
 @NgModule({
