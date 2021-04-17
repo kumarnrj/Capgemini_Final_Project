@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router,ParamMap } from '@angular/router';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import {Review} from '../../Modals/Review';
 @Component({
@@ -12,6 +12,7 @@ export class ReviewAndRatingComponent implements OnInit {
   public limit=4;
   public isListContainData=true;
   private role;
+  private reqId;
 
   public ReviewList1 =[{
     customerName:'neeraj',
@@ -64,19 +65,37 @@ export class ReviewAndRatingComponent implements OnInit {
   },]
 
   constructor(private auth:AuthenticationService,
-              private router:Router) { }
+              private router:Router,
+              private route:ActivatedRoute) { }
 
   ReviewList:Review[];
 
   ngOnInit(): void {
     let id = localStorage.getItem("id");
     this.role = localStorage.getItem("ROLE");
-    if(this.role==='ROLE_WASHER'){
+
+    
+    this.route.paramMap.subscribe((params:ParamMap)=>{
+       this.reqId = parseInt(params.get('id')); 
+    })
+ 
+    //reqId==2 && this.role==='ROLE_WASHER'
+    if(this.reqId==2){
       this.auth.getWasherReviewList(id)
       .subscribe(res=>{
         this.ReviewList = res;
       },
       err=>{
+        console.log(err);
+      })
+    }
+
+    // admin has requested to view order
+    if(this.reqId==1){
+      this.auth.getAllReview()
+      .subscribe(res=>{
+        this.ReviewList = res;
+      },err=>{
         console.log(err);
       })
     }
@@ -93,8 +112,15 @@ export class ReviewAndRatingComponent implements OnInit {
 
   // navigate to dashboard
   Dashboard(){
-    if(this.role==='ROLE_WASHER'){
+      
+    if(this.reqId==1){
+      this.router.navigate(["adminDashboard"]);
+    }
+    if(this.reqId==2){
       this.router.navigate(["washerDashboard"]);
     }
+    // if(this.role==='ROLE_WASHER'){
+    //   this.router.navigate(["washerDashboard"]);
+    // }
   }
 }

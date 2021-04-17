@@ -27,12 +27,24 @@ export class AdminDashboardComponent implements OnInit {
     this.role ="users"
       this.router.navigate(["adminDashboard",this.role]);
   }
-  viewOrders(){
-       
-  }
+  
   viewWasher(){
     this.role="washers"
     this.router.navigate(["adminDashboard",this.role]);
   }
+  viewOrders(){
+    this.router.navigate(["Dashboard/Orders",{id:3}]);
+       
+  }
+
+  // update order by admin
+  updateOrder(){
+    this.router.navigate(["Dashboard/Orders",{id:4}]);
+  }
+
+  viewRiew(){
+    this.router.navigate(['Reviews-Rating',{id:1}]);
+  }
+  
   
 }

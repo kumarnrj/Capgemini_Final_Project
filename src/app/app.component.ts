@@ -27,6 +27,8 @@ export class AppComponent {
 logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    localStorage.removeItem("id");
+    localStorage.removeItem("ROLE");
     this.ngOnInit()
     this.router.navigate(['login'])
 }

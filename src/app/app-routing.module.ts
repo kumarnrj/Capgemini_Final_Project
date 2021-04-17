@@ -16,9 +16,13 @@ import { UserDetailComponent } from './component/user-detail/user-detail.compone
 import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
 import { OrderListComponent } from './component/order-list/order-list.component';
 import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
+import { HomeComponent } from './component/home/home.component';
+import { BookingComponent } from './component/booking/booking.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
+  {path:'home',component:HomeComponent},
+  {path:'booking',component:BookingComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent,canActivate:[UserLoggedIn]},
   {path:'verify',component:VerifyUserComponent},

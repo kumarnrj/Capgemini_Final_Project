@@ -5,7 +5,7 @@
         <mdb-breadcrumb-item (click)="Dashboard()" >Dashboard</mdb-breadcrumb-item>
         <mdb-breadcrumb-item class="active" >Review & Rating</mdb-breadcrumb-item>
       </mdb-breadcrumb>
-    <div *ngFor="let review of ReviewList1 | slice:0:limit">
+    <div *ngFor="let review of ReviewList | slice:0:limit">
         <div class="card mt-3">
             <div class="card-body">
                 <div class="row">

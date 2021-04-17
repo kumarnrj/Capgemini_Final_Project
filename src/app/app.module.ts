@@ -23,6 +23,8 @@ import { UserDetailComponent } from './component/user-detail/user-detail.compone
 import { WasherDashboardComponent } from './component/washer-dashboard/washer-dashboard.component';
 import { OrderListComponent } from './component/order-list/order-list.component';
 import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
+import { HomeComponent } from './component/home/home.component';
+import { BookingComponent } from './booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ReviewAndRatingComponent } from './component/review-and-rating/review-a
     UserDetailComponent,
     WasherDashboardComponent,
     OrderListComponent,
-    ReviewAndRatingComponent
+    ReviewAndRatingComponent,
+    HomeComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,

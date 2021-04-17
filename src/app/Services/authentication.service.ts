@@ -105,8 +105,8 @@ export class AuthenticationService {
 //********************************* Order Service ****************************************** */
 
    // Getting all the orders
-   getAllOrders(){
-    return this.http.get(this.testOrderUrl);
+   getAllOrders():Observable<Orders[]>{
+    return this.http.get<Orders[]>(this.testOrderUrl);
   }
   // Getting the orders list 
   getCustomerOrderList(customerId):Observable<Orders[]>{
@@ -133,6 +133,12 @@ export class AuthenticationService {
  // ******************************************* review Service *******************************
  private testReviewUrl ="http://localhost:8083/api/";
 
+// getting all the review
+getAllReview():Observable<Review[]>{
+   return this.http.get<Review[]>(`${this.testReviewUrl}allReview`);
+}
+
+ // getting reviews by washer id
  getWasherReviewList(id):Observable<Review[]>{
    return this.http.get<Review[]>(`${this.testReviewUrl}washerId/${id}`);
  }

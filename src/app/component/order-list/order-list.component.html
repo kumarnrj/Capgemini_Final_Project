@@ -14,7 +14,8 @@
                         <th class="text-center">WashingDate</th>
                         <th class="text-center">WashingTime</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Payment Status</th>
+                        <th  class="text-center">Update Order</th>
                         <th class="text-center">View Details</th>
                     </tr>
                     
@@ -35,6 +36,7 @@
                         <td>
                            {{order?.time}}
                         </td>
+                        
                         <td>
 
                             <ng-container [ngSwitch]=order?.status>
@@ -48,6 +50,7 @@
                                     <mdb-badge pill="true" success="true">Completed</mdb-badge>
                                 </div>
                                 <div *ngSwitchCase="'CANCELED'">
+                                   
                                     <mdb-badge pill="true" danger="true">canceled</mdb-badge>
                                     
                                 </div>
@@ -55,20 +58,46 @@
                            
                         </td>
                         <td>
+                            <ng-container [ngSwitch]=order?.paymentStatus>
+                                <div *ngSwitchCase="'PENDING'">
+                                    <mdb-badge pill="true" warning="true">Pending</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'PAID'">
+                                    <mdb-badge pill="true" success="true">Paid</mdb-badge>
+                                </div>
+                           </ng-container>
+                           
+                           
+                        </td>
+                        <td *ngIf="isUpdateOrderByWasher">
                             <span class="table-up">
                                 <a class="text-success">
-
-                                    <mdb-icon (click)="acceptOrder(order)" mdbTooltip="Accept" fas icon="check" size="2x" ></mdb-icon>
-            
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
+                                        <button mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
+                                    </div>
                                 </a>
                             </span>
-                            <span class="table-up ml-4">
-                                <a class="text-danger">
-
-                                    <mdb-icon (click)="rejectOrder(order)" mdbTooltip="Reject" fas icon="times" size="2x" ></mdb-icon>
-            
-                                </a>
-                            </span>
+                        </td>
+                        <td *ngIf="isViewOrderByAdmin">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button mdbBtn type="button" color="success" class="waves-light" (click)="assignOrder(order)" mdbWavesEffect>Assign</button>
+                            </div>
+                           
+                        </td>
+                        <td *ngIf="isUpdateOrderByAdmin">
+                            
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
+                                        <button mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
+                                    </div>
+                               </td>
+                        <td *ngIf="isViewOrderByWasher">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button mdbBtn type="button" color="success" class="waves-light" (click)="acceptOrder(order)" mdbWavesEffect>Accept</button>
+                                <button mdbBtn type="button" color="danger" class="waves-light" (click)="rejectOrder(order)" mdbWavesEffect>Reject</button>
+                            </div>
+                           
                         </td>
                         <td>
                             <a>
@@ -80,12 +109,38 @@
                     </tr>
                
                 </table>
+               
             
             </div>
         </div>
     </div>
    
 </div>
-<a mdbBtn gradient="aqua" (click)="onClick()" mdbWavesEffect>click</a>
 
-
+<!--                   modal to assign washer                                            -->
+<div mdbModal #frame="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">Assign Washer</h4>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label >Washers</label>
+                <select class="ml-4" [(ngModel)]="washer" name="washer"  >
+              
+                    <option *ngFor="let washer of washerIdList" [value]="washer._id+','+washer.firstName" >{{washer.firstName}} ( {{washer._id}} )</option>
+                </select>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="frame.hide()" mdbWavesEffect>Close</button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="UpdateWasherInBookingList()" mdbWavesEffect>Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+       

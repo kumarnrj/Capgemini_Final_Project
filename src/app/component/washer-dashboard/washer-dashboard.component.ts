@@ -18,11 +18,16 @@ export class WasherDashboardComponent implements OnInit {
   // view orders
 
   viewOrders(){
-    this.router.navigate(["Dashboard/Orders"]);
+    this.router.navigate(["Dashboard/Orders",{id:1}]);
   }
 
   // view  review 
   viewRiew(){
-    this.router.navigate(["Reviews-Rating"]);
+    this.router.navigate(["Reviews-Rating",{id:2}]);
   }
+
+  // routing on click on update order
+updateOrder(){
+  this.router.navigate(["Dashboard/Orders",{id:2}]);
+}
 }

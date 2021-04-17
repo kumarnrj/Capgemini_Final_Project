@@ -1,8 +1,54 @@
+<!-- Dashboard -->
+
+    
+
+<div class="row  mb-3">
+    
+    <div class="sidebar-sticky d-none d-md-block ">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <i class="fas fa-tachometer-alt mr-1"></i>
+                    Dashboard
+                </a>
+                <hr>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-user mr-1"></i>
+                    My Profile
+                </a>
+                <hr>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-shopping-cart mr-1"></i>
+                    Orders
+                </a>
+                <hr>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-file mr-1"></i>
+                    Reviews
+                </a>
+                <hr>
+            </li>
+
+        </ul>
+    </div>
+
+   
+   
 <div class="container">
-    <!-- Card -->
+    <mdb-breadcrumb customClass="special-color white-text mt-5">
+        <mdb-breadcrumb-item routerLink="/">Home</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item class="active" >Dashboard</mdb-breadcrumb-item>
+      </mdb-breadcrumb>
     <div class="row">
+       
         <div class="col">
-            <mdb-card class="mt-5">
+            <mdb-card >
                 <div class="view rgba-white-slight waves-light" mdbWavesEffect>
                     <!-- Card img -->
                     <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
@@ -28,7 +74,7 @@
             <!-- Card -->
         </div>
         <div class="col">
-            <mdb-card class="mt-5">
+            <mdb-card >
                 <div class="view rgba-white-slight waves-light" mdbWavesEffect>
                     <!-- Card img -->
                     <img src="assets/img/users.jpg" class="usersImg"  alt="Card image cap" />
@@ -54,7 +100,7 @@
             <!-- Card -->
         </div>
         <div class="col">
-            <mdb-card class="mt-5">
+            <mdb-card >
                 <div class="view rgba-white-slight waves-light" mdbWavesEffect>
                     <!-- Card img -->
                     <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
@@ -80,5 +126,101 @@
             <!-- Card -->
         </div>
     </div>
+
+
+    <!-- Another row-->
+
+    <div class="row">
+        <div class="col">
+            <mdb-card class="mt-5">
+                <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                    <!-- Card img -->
+                    <!-- <img src="assets/img/users.jpg" class="usersImg"  alt="Card image cap" /> -->
+                    <i class="fas fa-file-alt-o fa-10x"></i>
+                    <a>
+                        <div class="mask"></div>
+                    </a>
+                </div>
+                <!--Card content-->
+                <mdb-card-body>
+                    <!--Title-->
+                    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                        <!-- Card img -->
+                        <!-- <img src="assets/img/users.jpg" class="usersImg"  alt="Card image cap" /> -->
+                        <i class="fas fa-cart-arrow-down fa-8x"></i>
+                        <a>
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+
+                    <mdb-card-title>
+                        <h4 class="mt-2">Orders</h4>
+                    </mdb-card-title>
+
+                    <!--Text-->
+                    <mdb-card-text>
+                    </mdb-card-text>
+
+                    <a mdbBtn gradient="blue" (click)="viewOrders()" mdbWavesEffect>View Orders</a>
+                </mdb-card-body>
+            </mdb-card>
+            <!-- Card -->
+        </div>
+        
+        <div class="col">
+            <mdb-card class="mt-5">
+                <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                    <!-- Card img -->
+                    <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
+                    <i class="fas fa-chalkboard-teacher fa-7x"></i>
+                    <a>
+                        <div class="mask"></div>
+                    </a>
+                </div>
+                <!--Card content-->
+                <mdb-card-body>
+                    <!--Title-->
+                    <mdb-card-title>
+                        <h4>Update Orders</h4>
+                    </mdb-card-title>
+
+                    
+
+                    <a mdbBtn gradient="purple" (click)="updateOrder()" mdbWavesEffect>Update</a>
+                </mdb-card-body>
+            </mdb-card>
+            <!-- Card -->
+        </div>
+        <div class="col">
+            <mdb-card class="mt-5">
+                <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                    <!-- Card img -->
+                    <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
+                    <i class="fas fa-tasks fa-8x"></i>
+                    <a>
+                        <div class="mask"></div>
+                    </a>
+                </div>
+                <!--Card content-->
+                <mdb-card-body>
+
+                    <!--Title-->
+                    <mdb-card-title>
+                        <h4>Review & Rating</h4>
+                    </mdb-card-title>
+
+                    <!--Text-->
+                    <mdb-card-text>
+                    </mdb-card-text>
+
+                    <a mdbBtn gradient="aqua" (click)="viewRiew()" mdbWavesEffect>View Review</a>
+                </mdb-card-body>
+            </mdb-card>
+            <!-- Card -->
+        </div>
+       
+    </div>
+</div>
+
 </div>
 
