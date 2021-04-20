@@ -233,11 +233,30 @@ get time(){
   // handling the book now button which is COD booking
   CODBooking(){
     // creating the order model
+    this.newOrder.paymentStatus="PENDING";
+    
+    // storing the data in the dataBase;
+    this.auth.addBooking(this.newOrder)
+    .subscribe(res=>{
+      console.log(res);
+    },err=>{
+      console.log(err);
+    })
   }
 
   // handling the online booking 
   onlineBooking(){
+        this.newOrder.paymentStatus="PENDING";
+        // storing the data in the dataBase;
+      this.auth.addBooking(this.newOrder)
+      .subscribe(res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      })
 
+     // redirecting to the payment gateway
+      
   }
 
 }

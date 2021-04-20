@@ -104,6 +104,11 @@ export class AuthenticationService {
 
 //********************************* Order Service ****************************************** */
 
+   // add order to databas
+   addBooking(newOrder:Orders){
+     return this.http.post(`${this.testOrderUrl}addBooking`,newOrder);
+   }
+
    // Getting all the orders
    getAllOrders():Observable<Orders[]>{
     return this.http.get<Orders[]>(this.testOrderUrl);
@@ -143,6 +148,17 @@ getAllReview():Observable<Review[]>{
    return this.http.get<Review[]>(`${this.testReviewUrl}washerId/${id}`);
  }
  
+ //*********************************************************************************** */
+
+ //***************************  payment service  **************************************
+
+ private payemtUrl="http://localhost:8084/create_order";
+// creating a payment order
+ createPaymentOrder(payAmount){
+   return this.http.post(this.payemtUrl,{
+     amount:payAmount
+   })
+ }
   
   // getter and setter for userEmail
    getUserEmail():String{

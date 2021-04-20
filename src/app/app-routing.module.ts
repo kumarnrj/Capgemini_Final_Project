@@ -18,11 +18,13 @@ import { OrderListComponent } from './component/order-list/order-list.component'
 import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
 import { HomeComponent } from './component/home/home.component';
 import {BookingComponent} from './component/booking/booking.component';
+import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'home',component:HomeComponent},
   {path:'booking',component:BookingComponent},
+  {path:'payment-gateway',component:PayementGatewayComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent,canActivate:[UserLoggedIn]},
   {path:'verify',component:VerifyUserComponent},

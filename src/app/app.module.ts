@@ -27,7 +27,8 @@ import { HomeComponent } from './component/home/home.component';
 import { BookingComponent } from './component/booking/booking.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
-import {DatePipe} from '@angular/common'
+import {DatePipe} from '@angular/common';
+import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import {DatePipe} from '@angular/common'
     OrderListComponent,
     ReviewAndRatingComponent,
     HomeComponent,
-    BookingComponent
+    BookingComponent,
+    PayementGatewayComponent
   ],
   imports: [
     BrowserModule,
