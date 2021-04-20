@@ -1,1 +1,281 @@
-<p>booking works!</p>
+<div class="container mt-4 bg-white">
+  <!-- Horizontal Steppers -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <!-- Stepers Wrapper -->
+      <ul class="stepper stepper-vertical">
+
+        <!-- First Step -->
+        <li [ngClass]="{'active': step1}">
+          <a (click)="step1Link()">
+            <span class="circle">1</span>
+            <span class="label">First step</span>
+          </a>
+          <div *ngIf="isStep1Completed" class="step-content grey lighten-3">
+            <form [formGroup]="PersonalForm" (ngSubmit)="submitStep1()">
+              <h1 class="text-center">Personal Details</h1>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="md-form form-sm">
+                    <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                    <input mdbInput type="text" id="form22" class="form-control" formControlName="firstName" />
+                    <label for="form22">FirstName</label>
+                    <mdb-error *ngIf="
+             firstName.invalid &&
+              (firstName.dirty || firstName.touched)
+            ">
+                      First Name is required
+                    </mdb-error>
+                    <mdb-success *ngIf="
+                    firstName.valid &&
+              (firstName.dirty || firstName.touched)
+            ">
+                    </mdb-success>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="md-form form-sm">
+                    <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                    <input mdbInput type="text" id="form23" class="form-control" formControlName="lastName" />
+                    <label for="form23">LastName</label>
+                    <mdb-error *ngIf="
+                    lastName.invalid &&
+                      (lastName.dirty || lastName.touched)
+                    ">
+                      Last Name is required
+                    </mdb-error>
+                    <mdb-success *ngIf="
+                    lastName.valid &&
+                      (lastName.dirty ||lastName.touched)
+                    ">
+                    </mdb-success>
+                  </div>
+                </div>
+              </div>
+              <div class="md-form form-sm">
+                <mdb-icon fas icon="phone" class="prefix"></mdb-icon>
+                <input mdbInput mdbValidate type="tel" id="form27" class="form-control" formControlName="phone" />
+                <label for="form27">Phone</label>
+                <mdb-error *ngIf="
+                mobile.invalid &&
+                  ( mobile.dirty ||  mobile.touched)
+                ">
+                  <p *ngIf="mobile.errors?.required" class="text-danger">Mobile is
+                    required</p>
+                  <p *ngIf="mobile.errors?.pattern" class="text-danger">Mobile
+                    number should be of 10 digits</p>
+
+                </mdb-error>
+
+              </div>
+
+              <div formGroupName="address">
+                <!-- Address -->
+                <div class="row">
+                  <div class="col-4">
+                    <div class="md-form form-sm">
+                      <mdb-icon fas icon="map-pin" class="prefix"></mdb-icon>
+                      <input mdbInput mdbValidate type="text" id="form28" class="form-control"
+                        formControlName="pincode" />
+                      <label for="form28">pincode</label>
+                      <mdb-error *ngIf="pincode.invalid && (pincode.dirty ||pincode.touched)">
+                        <p *ngIf="pincode.errors?.required" class="text-danger">pincode is required</p>
+                        <p *ngIf="pincode.errors?.pattern" class="text-danger">pincode length should be 6 digits</p>
+                      </mdb-error>
+
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="md-form form-sm">
+                      <mdb-icon fas icon="city" class="prefix"></mdb-icon>
+                      <input mdbInput mdbValidate type="text" id="form29" class="form-control" formControlName="city" />
+                      <label for="form29">City/Town/District</label>
+                      <mdb-error *ngIf="city.invalid && (city.dirty || city.touched)">
+                        required
+                      </mdb-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="md-form form-sm">
+                      <mdb-icon fas icon="home" class="prefix"></mdb-icon>
+                      <input mdbInput mdbValidate type="text" id="form30" class="form-control"
+                        formControlName="state" />
+                      <label for="form30">state</label>
+                      <mdb-error *ngIf="state.invalid && (state.dirty || state.touched)">
+                        required
+                      </mdb-error>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="md-form form-sm">
+                      <mdb-icon fas icon="street-view" class="prefix"></mdb-icon>
+                      <input mdbInput mdbValidate type="text" id="form31" class="form-control"
+                        formControlName="street" />
+                      <label for="form31">Street</label>
+                      <mdb-error *ngIf="street.invalid &&(street.dirty || street.touched)">
+                        required
+                      </mdb-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mb-5 ">
+                <button [disabled]="!PersonalForm.valid" type="submit" mdbBtn gradient="blue" block="true"
+                  rounded="true" class="z-depth-1a waves-light" mdbWavesEffect>Continue
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </li>
+
+
+<!-- Second Step -->
+        <li [ngClass]="{'active': step2}">
+          <a>
+            <span class="circle">2</span>
+            <span class="label">Second step</span>
+          </a>
+         
+          <div  *ngIf="isStep2Completed" class="step-content grey lighten-3">
+            <form [formGroup]="carDetailForm" (ngSubmit)="submitStep2()">
+
+              <h1 class="text-center">Car Details</h1>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="md-form form-sm">
+                    <mdb-icon fas icon="car" class="prefix"></mdb-icon>
+                    <input mdbInput type="text" id="form1" class="form-control" formControlName="carModel" />
+                    <label for="form1">Car Modal </label>
+                    <mdb-error *ngIf="
+         carModel.invalid &&
+          (carModel.dirty || carModel.touched)
+        ">
+                      Car Model is required ex. ALTO K10
+                    </mdb-error>
+                    <mdb-success *ngIf="
+                carModel.valid &&
+          (carModel.dirty || carModel.touched)
+        ">
+                    </mdb-success>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="md-form form-sm">
+                    <mdb-icon fas icon="car" class="prefix"></mdb-icon>
+                    <input mdbInput type="text" id="form2" class="form-control" formControlName="carNumber" />
+                    <label for="form2">Car Number</label>
+                    <mdb-error *ngIf="
+                carNumber.invalid &&
+                  (carNumber.dirty || carNumber.touched)
+                ">
+                      Car Number is required
+                    </mdb-error>
+                    <mdb-success *ngIf="
+                carNumber.valid &&
+                  (carNumber.dirty ||carNumber.touched)
+                ">
+                    </mdb-success>
+                  </div>
+                </div>
+              </div>
+
+              <h4>
+                <mdb-icon fas icon="soap" class="prefix mr-2  " size="lg"></mdb-icon>Washing Type
+              </h4>
+              <div class="custom-control custom-radio custom-control-inline ml-4">
+                <input type="radio" class="custom-control-input" id="now" name="washingType"
+                  (change)="onChangeselect('now')" mdbInput>
+                <label class="custom-control-label" for="now">Now</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="schedule" name="washingType"
+                  (change)="onChangeselect('schedule')" mdbInput>
+                <label class="custom-control-label" for="schedule">Schedule</label>
+              </div>
+              <hr>
+              <div class="md-form form-sm">
+                <mdb-icon fas icon="calendar" class="prefix"></mdb-icon>
+                <input mdbInput mdbValidate type="date" id="date" [(min)]="minDate" class="form-control"
+                  formControlName="date" />
+                <label for="date">Date</label>
+                <mdb-error *ngIf="
+                date.invalid &&
+                  (date.dirty || date.touched)
+                ">
+                  date is required
+                </mdb-error>
+              </div>
+              <div class="md-form form-sm">
+                <mdb-icon fas icon="clock" class="prefix"></mdb-icon>
+                <input mdbInput mdbValidate type="time" id="time" class="form-control" formControlName="time" />
+                <label for="time">Time</label>
+                <mdb-error *ngIf="
+                time.invalid &&
+                  (time.dirty || time.touched)
+                ">
+                  Time is required
+                </mdb-error>
+              </div>
+
+
+
+
+              <div class="text-center mb-5 ">
+                <button [disabled]="!carDetailForm.valid || washingType==undefined" mdbBtn
+                  gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light" mdbWavesEffect>Continue
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </li>
+
+ <!-- Third Step -->
+        <li [ngClass]="{'active': step3}">
+          <a>
+            <span class="circle">3</span>
+
+            <span class="label">Third step</span>
+          </a>
+          <!--  form no 3 -->
+          <div   *ngIf="isStep3Completed" class="step-content grey lighten-3">
+            <h1 class="text-center">Payment Details</h1>
+            <form>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="COD" name="paymentMode"
+                  (change)="onChangePaymentMode('COD')" mdbInput>
+                <label class="custom-control-label" for="COD">Cash On Delivery</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="online" name="paymentMode"
+                  (change)="onChangePaymentMode('online')" mdbInput>
+                <label class="custom-control-label" for="online">Pay Now</label>
+              </div>
+
+              <div class="text-center mt-4 mb-5 ">
+                <button *ngIf="isCOD" (click)="CODBooking()" mdbBtn gradient="blue" block="true" rounded="true"
+                  class="z-depth-1a waves-light" mdbWavesEffect>Book Now
+                </button>
+                <button *ngIf="!isCOD" (click)="onlineBooking()" mdbBtn gradient="blue" block="true" rounded="true"
+                  class="z-depth-1a waves-light" mdbWavesEffect>Pay Now
+                </button>
+              </div>
+
+
+            </form>
+          </div>
+
+        </li>
+
+      </ul>
+      <!-- /.Stepers Wrapper -->
+
+    </div>
+  </div>
+  <!-- /.Horizontal Steppers -->
+</div>

@@ -24,8 +24,10 @@ import { WasherDashboardComponent } from './component/washer-dashboard/washer-da
 import { OrderListComponent } from './component/order-list/order-list.component';
 import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
 import { HomeComponent } from './component/home/home.component';
-import { BookingComponent } from './booking/booking.component';
-
+import { BookingComponent } from './component/booking/booking.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {DatePipe} from '@angular/common'
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,10 +55,13 @@ import { BookingComponent } from './booking/booking.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
     MDBBootstrapModule.forRoot(),
   ],
   schemas:[NO_ERRORS_SCHEMA],
   providers: [
+    DatePipe,
     {
       provide:HTTP_INTERCEPTORS,
       useClass:LoaderInterceptorService,
