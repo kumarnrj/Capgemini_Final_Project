@@ -12,7 +12,6 @@
                     </h5>
                 </mdb-card-header>
                 <mdb-card-body class="px-lg-5 pt-0 ">
-                    {{registrationForm.value| json}}
                     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-6">

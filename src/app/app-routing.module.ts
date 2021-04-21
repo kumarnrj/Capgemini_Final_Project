@@ -20,12 +20,16 @@ import { HomeComponent } from './component/home/home.component';
 import {BookingComponent} from './component/booking/booking.component';
 import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component';
 import { ServicesComponent } from './component/services/services.component';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { AboutUsComponent } from './component/about-us/about-us.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'/login',pathMatch:'full'},
+  {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent},
   {path:'booking',component:BookingComponent},
   {path:'services',component:ServicesComponent},
+  {path:'contact',component:ContactUsComponent},
+  {path:'aboutus',component:AboutUsComponent},
   {path:'payment-gateway',component:PayementGatewayComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent,canActivate:[UserLoggedIn]},

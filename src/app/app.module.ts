@@ -27,7 +27,9 @@ import { HomeComponent } from './component/home/home.component';
 import { BookingComponent } from './component/booking/booking.component';
 import {DatePipe} from '@angular/common';
 import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component';
-import { ServicesComponent } from './component/services/services.component'
+import { ServicesComponent } from './component/services/services.component';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { AboutUsComponent } from './component/about-us/about-us.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,9 @@ import { ServicesComponent } from './component/services/services.component'
     HomeComponent,
     BookingComponent,
     PayementGatewayComponent,
-    ServicesComponent
+    ServicesComponent,
+    ContactUsComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
