@@ -3,7 +3,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import {ICustomWindow, WindowRefService} from '../../Services/window-ref.service'
 import swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router,ParamMap } from '@angular/router';
 import { identifierModuleUrl } from '@angular/compiler';
 @Component({
   selector: 'app-payement-gateway',
@@ -19,8 +19,10 @@ export class PayementGatewayComponent implements OnInit {
   public price=0;
   public extraCharges=0;
   public total=0;
+  private reqId;
 
   constructor(private auth:AuthenticationService,
+              private route:ActivatedRoute,
               private router:Router,
               private http:HttpClient,
               private zone:NgZone,
@@ -29,7 +31,28 @@ export class PayementGatewayComponent implements OnInit {
                }
 
   ngOnInit(): void {
+         this.route.paramMap.subscribe((params:ParamMap)=>{
+           this.reqId= parseInt(params.get("id"));
+         })
 
+         if(this.reqId==1){
+           this.price=499;
+           this.total=this.price+this.extraCharges;
+           this.amount = this.total;
+         }
+         else if(this.reqId==2){
+           this.price=899;
+           this.total=this.price+this.extraCharges;
+           this.amount = this.total;
+         }
+        else if(this.reqId==3){
+          this.price=1499;
+          this.total=this.price+this.extraCharges;
+          this.amount = this.total;
+         }
+         else{
+           this.router.navigate(["ax"]);
+         }    
   }
 
    // first request to server to create order
@@ -97,17 +120,14 @@ paymentHandler(res: any) {
     this.updatePaymentOnServer(res.razorpay_payment_id, res.razorpay_order_id, "paid")
   });
 }
-  // update the payment in database
-  updatePaymentOnServer(payment_id: string, order_id: string, status: string) {
-    let url = "http://localhost:8084/update_order"
+
   
-    this.http.post(url, {
-      payment_id: payment_id,
-      order_id: order_id,
-      status: status
-    }).toPromise().then((res) => {
+// update the payment in database
+  updatePaymentOnServer(payment_id: string, order_id: string, status: string) {
+   
+    this.auth.updatePaymentStatus(payment_id,order_id,status).subscribe((res) => {
       swal.fire("Done", "Payment Successful", "success");
-    }).catch(err => {
+    },err => {
       swal.fire("Failed", "Payment not recieved if amount debuted refund will be initiated within 2 working days", "error")
     })
   }
@@ -130,7 +150,7 @@ paymentHandler(res: any) {
           'success'
         ).then((result)=>{
           if(result.isConfirmed){
-            this.router.navigate(["booking"]);
+            this.router.navigate(["home"]);
           }
         })
       }

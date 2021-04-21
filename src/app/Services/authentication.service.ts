@@ -152,13 +152,25 @@ getAllReview():Observable<Review[]>{
 
  //***************************  payment service  **************************************
 
- private payemtUrl="http://localhost:8084/create_order";
+ private payemtUrl="http://localhost:8084/";
 // creating a payment order
  createPaymentOrder(payAmount){
-   return this.http.post(this.payemtUrl,{
+   return this.http.post(`${this.payemtUrl}create_order`,{
      amount:payAmount
    })
  }
+
+// updating the payment order
+updatePaymentStatus(payment_id: string, order_id: string, status: string){
+   return this.http.post(`${this.payemtUrl}update_order`, {
+    payment_id: payment_id,
+    order_id: order_id,
+    status: status
+  })
+
+}
+
+ //**************************************************************************************** */
   
   // getter and setter for userEmail
    getUserEmail():String{

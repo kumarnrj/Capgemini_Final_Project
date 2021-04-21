@@ -2,6 +2,7 @@ import { ConnectedPositionStrategy, ConnectionPositionPair } from '@angular/cdk/
 import { HashLocationStrategy,DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,Validators,FormControl} from '@angular/forms';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Orders } from 'src/app/Modals/Orders';
 import { UserDetails } from 'src/app/Modals/UserDetails';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
@@ -22,6 +23,9 @@ export class BookingComponent implements OnInit {
   public washingType;
   public paymentMode;
   public isCOD=true;
+  private reqId;
+  private Package:string;
+  private amount:number;
   
   //To restrict past date
  
@@ -54,10 +58,35 @@ export class BookingComponent implements OnInit {
    })
 
   constructor(private auth:AuthenticationService,
+              private router:Router,
+              private route:ActivatedRoute,
               private datepipe:DatePipe) { }
 
   // ng init metho 
   ngOnInit(): void {
+     
+    // reading the optional params
+    this.route.paramMap.subscribe((params:ParamMap)=>{
+      this.reqId = parseInt(params.get('id')); 
+   })
+      
+     if(this.reqId==1){
+       this.Package="SILVER";
+       this.amount=499;
+     }
+    else if(this.reqId==2){
+      this.Package="GOLD";
+      this.amount=999;
+    }
+    else if(this.reqId==3){
+      this.Package="PLATINUM";
+      this.amount=1499;
+    }
+    else{
+      this.router.navigate(["**"]);
+    }
+    
+
     // fetching the user data 
     setTimeout(()=>{
       this.auth.getUserData(localStorage.getItem("email"))
@@ -247,7 +276,7 @@ get time(){
   // handling the online booking 
   onlineBooking(){
         this.newOrder.paymentStatus="PENDING";
-        // storing the data in the dataBase;
+      // storing the data in the dataBase;
       this.auth.addBooking(this.newOrder)
       .subscribe(res=>{
         console.log(res);
@@ -256,6 +285,7 @@ get time(){
       })
 
      // redirecting to the payment gateway
+     this.router.navigate(["payment-gateway",{id:this.reqId}]);
       
   }
 

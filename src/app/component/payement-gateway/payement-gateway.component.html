@@ -21,20 +21,21 @@
                     <p>Price:
 
                      <span class="price-span"><mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon> 
-                        100.00
+                        {{price}}
                      </span>  
                     </p>
                     <p>Extra Charges:
                         <span class="Excharge-span">  <mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon>
-                            0.00
+                           {{extraCharges}}
                          </span> 
                     </p>
                     <hr>
                     <h3>Total:
                         <span class="total-span">  <mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon>
-                            100.00
+                           {{total}}
                          </span> 
                     </h3>
+                    <hr>
                     <div class=" row ml-2 btnClass">
                         <div class="col col-sm ">
                             <button class="block" type="button" mdbBtn gradient="blue" (click)="paymentStart()" mdbWavesEffect>Pay Now</button>

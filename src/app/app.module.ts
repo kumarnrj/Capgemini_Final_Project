@@ -25,10 +25,9 @@ import { OrderListComponent } from './component/order-list/order-list.component'
 import { ReviewAndRatingComponent } from './component/review-and-rating/review-and-rating.component';
 import { HomeComponent } from './component/home/home.component';
 import { BookingComponent } from './component/booking/booking.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
 import {DatePipe} from '@angular/common';
-import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component'
+import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component';
+import { ServicesComponent } from './component/services/services.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +48,8 @@ import { PayementGatewayComponent } from './component/payement-gateway/payement-
     ReviewAndRatingComponent,
     HomeComponent,
     BookingComponent,
-    PayementGatewayComponent
+    PayementGatewayComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,8 +57,6 @@ import { PayementGatewayComponent } from './component/payement-gateway/payement-
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
-    MatInputModule,
     MDBBootstrapModule.forRoot(),
   ],
   schemas:[NO_ERRORS_SCHEMA],
