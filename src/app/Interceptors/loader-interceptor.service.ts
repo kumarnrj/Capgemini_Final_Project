@@ -14,11 +14,16 @@ export class LoaderInterceptorService implements HttpInterceptor {
     loadService.isLoading.next(true);
     let t = localStorage.getItem("token");
     
-    let token = req.clone({
-      setHeaders:{
-        Authorization:'Bearer '+t
-      }
-    })
+    // excluded the url
+    const re = "/authenticate";
+    if(req.url.search(re)===-1){
+      req = req.clone({
+        setHeaders:{
+          Authorization:'Bearer '+t
+        }
+      })
+    }
+    
     return next.handle(req).pipe(
       finalize(
         ()=>{

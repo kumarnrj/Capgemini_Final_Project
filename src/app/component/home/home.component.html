@@ -1,70 +1,372 @@
-
-
 <div class="container-fluid mt-5">
-    
-    <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-        <mdb-carousel-item>
-          <div class="view w-100 ">
-            <img class="d-block w-100" src="assets/img/car1.jpg"  alt="First slide">
-            <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-          </div>
-          <div class="carousel-caption">
-            <h1 class="h1-responsive">Quality Serivce For You</h1>
-            <p>First text</p>
-          </div>
-        </mdb-carousel-item>
-        <mdb-carousel-item>
-          <div class="view w-100">
-            <img class="d-block w-100" src="assets/img/car4.jpeg"  alt="Second slide">
-            <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
-          </div>
-          <div class="carousel-caption">
-            <h3 class="h3-responsive">Strong mask</h3>
-            <p>Secondary text</p>
-          </div>
-        </mdb-carousel-item>
-        <mdb-carousel-item>
-          <div class="view w-100">
-            <img class="d-block w-100" src="assets/img/car_interior3.jpg" alt="Third slide">
-            <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
-          </div>
-          <div class="carousel-caption">
-            <h3 class="h3-responsive">Slight mask</h3>
-            <p>Third text</p>
-          </div>
-        </mdb-carousel-item>
-     
-      <mdb-carousel-item>
-        <div class="view w-100">
-          <img class="d-block w-100" src="assets/img/car_tyre_2.jpg" alt="Third slide">
-          <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
-        </div>
-        <div class="carousel-caption">
-          <h3 class="h3-responsive">Slight mask</h3>
-          <p>Third text</p>
-        </div>
-      </mdb-carousel-item>
-    </mdb-carousel>
+
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item>
+      <div class="view w-100 ">
+        <img class="d-block w-100" src="assets/img/car1.jpg" alt="First slide">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h1 class="h1-responsive">Quality Serivce For You</h1>
+        <p>Explore Now</p>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/car4.jpeg" alt="Second slide">
+        <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Silver Package</h3>
+        <mdb-badge color="red" style="font-size: 20px;">@<mdb-icon fas icon="rupee-sign ml-2 mr-1">
+        </mdb-icon>499</mdb-badge>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/car_ext_green2.jpg" alt="Third slide">
+        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Gold Package</h3>
+        <mdb-badge color="red" style="font-size: 20px;">@<mdb-icon fas icon="rupee-sign ml-2 mr-1">
+        </mdb-icon>899</mdb-badge>
+      </div>
+    </mdb-carousel-item>
+   
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/car6.jpg" alt="Third slide">
+        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Platinum Package</h3>
+        <mdb-badge color="red" style="font-size: 20px;">@<mdb-icon fas icon="rupee-sign ml-2 mr-1">
+        </mdb-icon>1499</mdb-badge>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/car_interior1.jpg" alt="Third slide">
+        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Happy Customer Rating</h3>
+        
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
 </div>
+<a mdbBtn color="primary" gradient="blue" class="waves-light" (click)="api()" mdbWavesEffect>
+  Book Now
+</a>
+<div class="container-fluid mt-3 mb-3">
+  <mdb-card>
+    <div class="text-center py-5 px-4 my-5">
+      <div>
+        <h2 class="card-title h1-responsive pt-3 mb-5 font-bold">
+          <strong>Tell us your car location and we will come to you
 
-<div class="container-fluid  mt-3 mb-3">
-    <mdb-card >
-        <div class="text-center py-5 px-4 my-5">
-          <div>
-            <h2 class="card-title h1-responsive pt-3 mb-5 font-bold">
-                <strong>Tell us your car location and we will come to you
-
-                </strong></h2>
-            <p class="mx-5 mb-5">With Our Service, you can get your car washed wherever 
-                you are at your convenience. Whether it's your home, 
-                salon, office or any other place, your car wash is just a few taps away. 
-            </p>
-            <hr class="my-4">
-            <a mdbBtn color="primary" gradient="blue" class="waves-light" 
-            (click)="bookNow()" mdbWavesEffect>
-              Book Now
-            </a>
-          </div>
+          </strong>
+        </h2>
+        <p class="mx-5 mb-5">With Our Service, you can get your car washed wherever
+          you are at your convenience. Whether it's your home,
+          salon, office or any other place, your car wash is just a few taps away.
+        </p>
+        <hr class="my-4">
+        <a mdbBtn color="primary" gradient="blue" class="waves-light" (click)="bookNow()" mdbWavesEffect>
+          Book Now
+        </a>
+      </div>
+    </div>
+  </mdb-card>
+</div>
+<div class="container-fluid ">
+  <h1 class="text-center text-white mt-5">W&W Car Wash Services</h1>
+  <hr class="unique-color ">
+  <div class="row mt-4">
+    <!--  Silver Serivce-->
+    <div class="col mb-2">
+      <!-- Card -->
+      <mdb-card>
+        <div class="view rgba-white-slight waves-light d-none d-md-block" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img src="assets/img/car_ext_green2.jpg" alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask"></div>
+          </a>
         </div>
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4 class="card-title">SILVER PACKAGE <mdb-badge color="red">@<mdb-icon fas icon="rupee-sign ml-2 mr-1">
+                </mdb-icon>499</mdb-badge>
+            </h4>
+          </mdb-card-title>
+
+          <!--Text-->
+          <mdb-card-text>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Exterior Washing
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior Vacuuming
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Basic Cleaning
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Basic Polishing
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior Sanitization <mdb-badge success="true">Free</mdb-badge>
+            </span>
+          </mdb-card-text>
+
+
+          <a (click)="book1()" mdbBtn gradient="blue" mdbWavesEffect>Book a wash</a>
+          <small class="moreDetails" style="margin-left: 25px;"><a routerLink="/services">See Full Details </a></small>
+        </mdb-card-body>
       </mdb-card>
+      <!-- Card -->
+    </div>
+
+
+
+    <div class="col mb-2">
+      <!-- Card -->
+      <mdb-card>
+        <div class="view rgba-white-slight waves-light d-none d-md-block" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img src="assets/img/car_interior2.jpg" alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4 class="card-title">GOLD PACKAGE
+              <mdb-badge color="amber darken-2">@<mdb-icon fas icon="rupee-sign ml-2 mr-1"></mdb-icon>899
+              </mdb-badge>
+            </h4>
+          </mdb-card-title>
+
+          <!--Text-->
+          <mdb-card-text>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Silver Included
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Engine Cleaning
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior detail Clean
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior Dry Clean
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior Sanitization <mdb-badge success="true">Free</mdb-badge>
+            </span>
+          </mdb-card-text>
+
+
+          <a (click)="book2()" mdbBtn gradient="blue" mdbWavesEffect>Book a Wash</a>
+
+          <small class="moreDetails" style="margin-left: 30px;"><a routerLink="/services">See Full Details </a></small>
+        </mdb-card-body>
+      </mdb-card>
+      <!-- Card -->
+    </div>
+
+
+
+    <div class="col mb-2">
+      <!-- Card -->
+      <mdb-card>
+        <div class="view rgba-white-slight waves-light d-none d-md-block" mdbWavesEffect>
+          <!-- Card img -->
+          <mdb-card-img src="assets/img/car_ext_green1.jpg" alt="Card image cap"></mdb-card-img>
+          <a>
+            <div class="mask"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4 class="card-title">PLATINUM PACK
+              <mdb-badge color="purple darken-2">@<mdb-icon fas icon="rupee-sign ml-2 mr-1"></mdb-icon>1499
+              </mdb-badge>
+            </h4>
+          </mdb-card-title>
+
+          <!--Text-->
+          <mdb-card-text>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Gold Included
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Interior Dry Clean
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Rubbing - Polishing
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              3M or Meguiar's
+            </span>
+            <br>
+            <span>
+              <mdb-icon class="check" fas icon="check"></mdb-icon>
+              Full Sanitization <mdb-badge success="true">Free</mdb-badge>
+            </span>
+          </mdb-card-text>
+
+
+
+          <a (click)="book3()" mdbBtn gradient="blue" mdbWavesEffect>Book a wash</a>
+          <small class="moreDetails " style="margin-left: 25px;"><a routerLink="/services">See Full Details </a></small>
+        </mdb-card-body>
+      </mdb-card>
+      <!-- Card -->
+    </div>
+  </div>
 </div>
+
+<div class="container-fluid">
+  <h1 class="text-center text-white mt-5">Customer Review</h1>
+  <hr class="unique-color">
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/bg.jpg" alt="First slide">
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <p>
+          <mdb-icon fas icon="quote-left"></mdb-icon> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
+          id
+          officiis hic tenetur quae quaerat ad
+          velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
+          molestias
+          voluptatum
+          inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor veniam.<mdb-icon fas icon="quote-right"></mdb-icon>
+        </p>
+        <h4 class="font-weight-bold">Anna Deynah</h4>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100 ">
+        <img class="d-block w-100" src="assets/img/bg.jpg" alt="Second slide">
+        <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <p>
+          <mdb-icon fas icon="quote-left"></mdb-icon> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
+          id
+          officiis hic tenetur quae quaerat ad
+          velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
+          molestias
+          voluptatum
+          inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor veniam.<mdb-icon fas icon="quote-right"></mdb-icon>
+        </p>
+        <h4 class="font-weight-bold">Anna Deynah</h4>
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <div class="view w-100">
+        <img class="d-block w-100" src="assets/img/bg.jpg" alt="Third slide">
+        <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+        <p>
+          <mdb-icon fas icon="quote-left"></mdb-icon> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
+          id
+          officiis hic tenetur quae quaerat ad
+          velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
+          molestias
+          voluptatum
+          inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor veniam. <mdb-icon fas icon="quote-right"></mdb-icon>
+        </p>
+        <h4 class="font-weight-bold">Anna Deynah</h4>
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
+</div>
+
+
+
+
+
+
+
+
+
+  <div class="container-fluid mt-5 marketing text-white">
+    <hr class="featurette-divider">
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+
+        <h2>Impressive Interior</h2>
+        <p>Internal cleaning with dry steam and suction vacuuming using our special car cleaning accessories.</p>
+
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+
+        <h2>Ready To Shine</h2>
+        <p>External cleaning with Wet steam and also High Pressure wash using our special car cleaning accessories.
+        </p>
+
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+
+        <h2>Disinfection</h2>
+        <p>
+          Sanitization is a procedure of proper cleaning and removing virus and germs, it is also a part of Anti-bacterial Treatment.</p>
+
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+
+
+
+
+
+
+    <!-- /END THE FEATURETTES -->
+
+  </div>

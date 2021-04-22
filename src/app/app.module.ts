@@ -29,7 +29,8 @@ import {DatePipe} from '@angular/common';
 import { PayementGatewayComponent } from './component/payement-gateway/payement-gateway.component';
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
-import { AboutUsComponent } from './component/about-us/about-us.component'
+import { AboutUsComponent } from './component/about-us/about-us.component';
+import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { AboutUsComponent } from './component/about-us/about-us.component'
     PayementGatewayComponent,
     ServicesComponent,
     ContactUsComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    UnauthorizedAccessComponent
   ],
   imports: [
     BrowserModule,

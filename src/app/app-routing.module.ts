@@ -7,7 +7,8 @@ import { SignupComponent } from './component/signup/signup.component';
 import { VerifyUserComponent } from './component/verify-user/verify-user.component';
 import {AuthGuard} from './Services/auth.guard';
 import { ProfileComponent } from './component/profile/profile.component';
-import {UserLoggedIn,Profileactive} from './Services/LoggedInUser.guard';
+import {UserLoggedIn,Profileactive,
+  roleAdmin,roleCustomer,roleWasher,UserAdminOrWasher} from './Services/LoggedInUser.guard';
 import { MyOrdresComponent } from './component/my-ordres/my-ordres.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { OrdersDetailComponent } from './component/orders-detail/orders-detail.component';
@@ -22,28 +23,30 @@ import { PayementGatewayComponent } from './component/payement-gateway/payement-
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
+import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent},
-  {path:'booking',component:BookingComponent},
+  {path:'booking',component:BookingComponent,canActivate:[UserLoggedIn]},
   {path:'services',component:ServicesComponent},
   {path:'contact',component:ContactUsComponent},
   {path:'aboutus',component:AboutUsComponent},
-  {path:'payment-gateway',component:PayementGatewayComponent},
+  {path:'payment-gateway',component:PayementGatewayComponent,canActivate:[UserLoggedIn]},
   {path:'login',component:LoginComponent},
-  {path:'signup',component:SignupComponent,canActivate:[UserLoggedIn]},
+  {path:'signup',component:SignupComponent},
   {path:'verify',component:VerifyUserComponent},
   {path:'forgetPassword',component:ForgetPasswordComponent},
   {path:'changePassword',component:ChangePasswordComponent,canActivate:[AuthGuard]},
   {path:'myaccount/profile',component:ProfileComponent,canActivate:[Profileactive]},
   {path:'myaccount/myorders',component:MyOrdresComponent},
   {path:'myaccount/myorders/:id',component:OrdersDetailComponent},
-  {path:'adminDashboard',component:AdminDashboardComponent},
-  {path:'adminDashboard/:user',component:UserDetailComponent},
-  {path:'washerDashboard',component:WasherDashboardComponent},
-  {path:'Dashboard/Orders',component:OrderListComponent},
-  {path:'Reviews-Rating',component:ReviewAndRatingComponent},
+  {path:'adminDashboard',component:AdminDashboardComponent,canActivate:[roleAdmin]},
+  {path:'adminDashboard/:user',component:UserDetailComponent,canActivate:[roleAdmin]},
+  {path:'washerDashboard',component:WasherDashboardComponent,canActivate:[roleWasher]},
+  {path:'Dashboard/Orders',component:OrderListComponent,canActivate:[UserAdminOrWasher]},
+  {path:'Reviews-Rating',component:ReviewAndRatingComponent,canActivate:[UserAdminOrWasher]},
+  {path:'unauthorized',component:UnauthorizedAccessComponent},
   {path:'**',component:PageNotFoundComponent},
 ];
 

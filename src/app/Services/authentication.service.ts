@@ -19,7 +19,7 @@ export class AuthenticationService {
   private isUserVerified:boolean;
 
   private _url="http://localhost:8100/authenticate";
-  private userUrl="http://localhost:8100/user-service/addUser"
+  private userServiceUrl="http://localhost:8100/user-service/api/"
   private testUrl="http://localhost:8081/api/";
   private emailUrl="http://localhost:8100/email-service/sendOtp";
   private testEmailUrl="http://localhost:8080/sendOtp"
@@ -38,23 +38,23 @@ export class AuthenticationService {
     return this.http.get("http://localhost:8100/user-service/api/findByEmail/neeraj.neerajkumar11@gmail.com");
   }
 
+  //authenticate the user
+  authenticateUser(email:String,password:String){
+    return  this.http.post(this._url,{
+       username:email,
+       password:password
+     })
+}
 
    // getting the user data 
    getUserData(email:String):Observable<UserDetails>{
      console.log("inside it");
-     let url = "http://localhost:8081/api/findByEmail/"+email;
+    //  let url = "http://localhost:8081/api/findByEmail/"+email;
+    let url = `${this.userServiceUrl}findByEmail/${email}`;
      return  this.http.get<UserDetails>(url);
    }
 
-  //authenticate the use
-   authenticateUser(email:String,password:String){
-          return  this.http.post(this._url,{
-             username:email,
-             password:password
-           })
-   }
-
-   
+  
    // adding or registering the user
    registerUser(user:User){
     return this.http.post(this.testUrl+"addUser",user);
@@ -62,7 +62,9 @@ export class AuthenticationService {
 
    // updating the user 
    updateUser(user:User,userId){
-     return this.http.put(this.testUrl+"/"+userId,user);
+      let url = `${this.userServiceUrl}${userId}`;
+      return this.http.put(url,user);
+    //  return this.http.put(this.testUrl+"/"+userId,user);
    }
 
    // Deleting the user from the database based on the userId
@@ -184,6 +186,28 @@ updatePaymentStatus(payment_id: string, order_id: string, status: string){
    // To check if the user is loggedIn or not
    isUserLoggedIn(){
      return !!localStorage.getItem("token");
+   }
+
+   // check the role of the user
+   isUserCustomer(){
+       if(localStorage.getItem("ROLE")==="ROLE_USER"){
+         return true;
+       }
+       return false;
+   }
+
+   isUserAdmin(){
+    if(localStorage.getItem("ROLE")==="ROLE_ADMIN"){
+      return true;
+    }
+    return false;
+   }
+
+   ifUserWasher(){
+    if(localStorage.getItem("ROLE")==="ROLE_WASHER"){
+      return true;
+    }
+    return false;
    }
 
    //getter and setter for otp is verified or not

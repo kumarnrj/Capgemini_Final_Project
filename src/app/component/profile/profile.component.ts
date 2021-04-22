@@ -51,14 +51,16 @@ export class ProfileComponent implements OnInit {
 
   // init method
   ngOnInit(): void {
-
-    this.auth.getUserData(localStorage.getItem("email"))
+    setTimeout(()=>{
+      this.auth.getUserData(localStorage.getItem("email"))
       .subscribe(res => {
         this.LoggedInUser = res;
         this.userId = res._id;
         this.user = this.LoggedInUser.firstName;
         this.setValueToEditForm();
       })
+    },1)
+    
   }
 
   // set value to the form

@@ -11,10 +11,10 @@ import { AuthenticationService } from './authentication.service';
     constructor(private _authService:AuthenticationService,private _router:Router){}
     canActivate():boolean{
         if(this._authService.isUserLoggedIn()){
-            this._router.navigate(['/']);
-            return false;
-        }else{
            return true;
+        }else{
+          this._router.navigate(["login"]);
+           return false;
         }
     }
   }
@@ -36,4 +36,78 @@ import { AuthenticationService } from './authentication.service';
         }
     }
   }
+
+ // roles of user
+ // ROLE ->  Admin
+ @Injectable({
+  providedIn: 'root'
+})
+export class roleAdmin implements CanActivate {
+
+  constructor(private _authService:AuthenticationService,private _router:Router){}
+  canActivate():boolean{
+      if(this._authService.isUserAdmin()){
+          return true;
+      }else{
+        
+         this._router.navigate(['unauthorized']);
+          return false;
+      }
+  }
+} 
    
+// ROLE -> washer
+// roles of user
+@Injectable({
+  providedIn: 'root'
+})
+export class roleWasher implements CanActivate {
+
+  constructor(private _authService:AuthenticationService,private _router:Router){}
+  canActivate():boolean{
+      if(this._authService.ifUserWasher()){
+          return true;
+      }else{
+        
+         this._router.navigate(['unauthorized']);
+          return false;
+      }
+  }
+} 
+
+// ROLE-> customer
+// roles of user
+@Injectable({
+  providedIn: 'root'
+})
+export class roleCustomer implements CanActivate {
+
+  constructor(private _authService:AuthenticationService,private _router:Router){}
+  canActivate():boolean{
+      if(this._authService.isUserCustomer()){
+          return true;
+      }else{
+        
+         this._router.navigate(['unauthorized']);
+          return false;
+      }
+  }
+} 
+
+// if the user is washer or admin
+@Injectable({
+  providedIn: 'root'
+})
+export class UserAdminOrWasher implements CanActivate {
+
+  constructor(private _authService:AuthenticationService,private _router:Router){}
+  canActivate():boolean{
+      if(this._authService.ifUserWasher() || this._authService.isUserAdmin()){
+          return true;
+      }else{
+        
+         this._router.navigate(['unauthorized']);
+          return false;
+      }
+  }
+} 
