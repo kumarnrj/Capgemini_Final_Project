@@ -1,0 +1,21 @@
+@media all and (min-width: 768px) {
+    tr  {
+      td {
+        vertical-align: middle !important;
+      }
+      span {
+        &:not([class]) {
+          padding: 1rem 1rem;
+        }
+      }
+    }
+  }
+// .card{
+//     background-color:#242B2E;
+// }
+// .card-body{
+//     color: wheat;
+// }
+// tr{
+//     color: aliceblue;
+// }

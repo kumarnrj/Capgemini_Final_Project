@@ -1,0 +1,33 @@
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 row-verify  ">
+    <div class="col-md-12">
+        <mdb-card>
+            <mdb-card-body class="px-lg-5 pt-5  ">
+                <form #otpForm="ngForm" (ngSubmit)="verifyOtp()" novalidate *ngIf ="!submitted">
+               
+                <div class="alert alert-success" role="alert">
+                  OTP has been sent to your email id enter to verify account
+                 
+                </div>
+                    <div class="md-form form-sm ">
+                        <mdb-icon fas icon="key" class="prefix"></mdb-icon>
+                        <input type="text" id="form22" mdbInput   [(ngModel)]='otp' class="form-control"
+                        [class.is-invalid]="name.invalid && name.touched"  required #name="ngModel" name='otp'  />
+                        <label for="form22">Enter OTP</label>
+                        <small class="text-danger" [class.d-none]="name.valid || name.untouched">Otp is required</small>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button [disabled]="otpForm.form.invalid" type="submit" mdbBtn gradient="blue" block="true" rounded="true"
+                            class="z-depth-1a waves-light"  mdbWavesEffect >verify
+                        </button>
+                    </div>
+                </form>
+
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,29 @@
+.price-span{
+    margin-left: 70%;
+}
+.Excharge-span{
+    margin-left: 54%;
+}
+
+.total-span{
+    margin-left: 50%;
+}
+
+@media (max-width: 575.98px){
+    .price-span{
+        margin-left: 60%;  
+    }
+    .Excharge-span{
+        margin-left: 40%;
+    }
+    .total-span{
+        margin-left: 50%;
+    }
+    .block{
+        width: 100%;   
+    }
+    .btnClass{
+       margin: 4px;
+    }
+   
+}

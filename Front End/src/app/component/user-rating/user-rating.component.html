@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <mdb-breadcrumb customClass="special-color white-text mt-3">
+        <mdb-breadcrumb-item routerLink="/home">Home</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item class="active">Review & Rating</mdb-breadcrumb-item>
+    </mdb-breadcrumb>
+    <div>
+
+        <h1 class="text-center text-white ">Rate & Review</h1>
+        <hr class="unique-color">
+       
+    </div>
+
+    <!--Feedback-->
+
+
+    <div class="container ">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Rate Us</h4>
+            </div>
+            <div class="modal-body mx-3">
+                <form  [formGroup]="validatingForm" (ngSubmit)="SendQuery()">
+                    <div class="md-form mb-5">
+                        <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                        <input type="text" id="form34" class="form-control" mdbInput mdbValidate
+                        formControlName="serviceRating">
+                        <label for="form34">Service Rating (1-5)</label>
+                        <mdb-error
+                            *ngIf="name.invalid && (name.dirty || name.touched)">
+                            <p *ngIf="name.errors?.required" class="text-danger">
+                                required</p>
+                            <p *ngIf="name.errors?.pattern" class="text-danger">Should be between 0-5</p>
+                        </mdb-error>
+                        
+                    </div>
+                    <div class="md-form mb-5">
+                        <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                        <input type="text" id="form35" class="form-control" mdbInput mdbValidate
+                        formControlName="washerRating">
+                        <label for="form35">washer Rating (1-5)</label>
+                        <mdb-error
+                            *ngIf="washerRating.invalid && (washerRating.dirty || washerRating.touched)">
+                            <p *ngIf="washerRating.errors?.required" class="text-danger">
+                                required</p>
+                            <p *ngIf="washerRating.errors?.pattern" class="text-danger">Should be between 0-5</p>
+                        </mdb-error>
+                        
+                    </div>
+
+                    
+
+                   
+
+                    <div class="md-form">
+                        <mdb-icon fas icon="pencil-alt" class="prefix grey-text"></mdb-icon>
+                        <textarea type="text" id="form8" class="md-textarea form-control" rows="1" mdbInput
+                            mdbValidate formControlName="review"></textarea>
+                        <label for="form8">Your Review</label>
+                        <mdb-error
+                            *ngIf="review.invalid && (review.dirty || review.touched)">
+                             message is required
+                        </mdb-error>
+         
+                    </div>
+
+            
+            <div class="modal-footer d-flex justify-content-center">
+                <button [disabled]="!validatingForm.valid" mdbBtn color="unique" class="waves-light" mdbWavesEffect>Submit Review
+                    <mdb-icon far icon="paper-plane" class="ml-1"></mdb-icon>
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

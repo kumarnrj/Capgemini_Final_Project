@@ -1,0 +1,53 @@
+<div class="container-fluid  justify-content-center">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-md-4 mt-5 mb-5 col-sm-4">
+            <mdb-card>
+                <!--Card image-->
+                <img src="assets/img/payment.jpg" alt="Payment Image" />
+                <!--Card content-->
+                <mdb-card-body>
+
+                    <!--Title-->
+                    <mdb-card-title>
+                        <h4 class="font-weight-bold">Order Summery</h4>
+                    </mdb-card-title>
+
+                    <!--Text-->
+                    <mdb-card-text>You'll be securely redirected to
+                        razorpay Payment Gateway to complete your Booking.
+                    </mdb-card-text>
+                    <hr>
+                    <p>Price:
+
+                     <span class="price-span"><mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon> 
+                        {{price}}
+                     </span>  
+                    </p>
+                    <p>Extra Charges:
+                        <span class="Excharge-span">  <mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon>
+                           {{extraCharges}}
+                         </span> 
+                    </p>
+                    <hr>
+                    <h3>Total:
+                        <span class="total-span">  <mdb-icon fas icon="rupee-sign" class="prefix"></mdb-icon>
+                           {{total}}
+                         </span> 
+                    </h3>
+                    <hr>
+                    <div class=" row ml-2 btnClass">
+                        <div class="col col-sm ">
+                            <button class="block" type="button" mdbBtn gradient="blue" (click)="paymentStart()" mdbWavesEffect>Pay Now</button>
+                    
+                        </div>
+                        <div class="col col-sm ">
+                            <button class="block" type="button" mdbBtn gradient="purple"(click)="paymentCancel()" mdbWavesEffect>Cancel</button>
+                        </div>
+                    
+                    </div>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+    </div>
+</div>

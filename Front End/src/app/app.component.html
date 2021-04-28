@@ -1,0 +1,170 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" href="/home">W&W</a></mdb-navbar-brand>
+  
+    <!-- Collapsible content -->
+    <links>
+  
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link waves-light" routerLink="/home" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light" routerLink="/services" mdbWavesEffect>Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light" routerLink="/aboutus"  mdbWavesEffect>About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light" routerLink="/contact" mdbWavesEffect>Contact</a>
+        </li>
+       
+       
+  
+      </ul>
+      <!-- Links -->
+  
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link">
+            <div *ngIf=!loggedIn>
+            <mdb-icon fas icon="sign-in-alt"></mdb-icon>
+            <a class="text-light" routerLink="/login">Login</a>
+          </div>
+            
+            <div *ngIf=loggedIn class="btn-group" mdbDropdown>
+              <mdb-icon fas icon="user fa-lg" mdbDropdownToggle></mdb-icon>
+              <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                    <a class="dropdown-item" routerLink="/myaccount/profile">My Profile</a>
+                <div class="divider dropdown-divider"></div>
+                <a *ngIf="user" class="dropdown-item" (click)="onMyOrder()">My Orders</a>
+                <a *ngIf="admin" class="dropdown-item" (click)="onMyOrder()">Dashboard</a>
+                <a *ngIf="washer" class="dropdown-item" (click)="onMyOrder()">Dashboard</a>
+                 <div class="divider dropdown-divider"></div>
+                 
+                <span  class="logoutIcon dropdown-item" (click)="logout()"><mdb-icon  fas icon="sign-out-alt" style="color: #1B98F5;"></mdb-icon>LogOut</span> 
+                
+              
+              
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </links>
+    <!-- Collapsible content -->
+  
+  </mdb-navbar>
+  <!-- Spinner to intercept http request -->
+<div *ngIf="loadService.isLoading | async" class="loader-container d-flex justify-content-center ">
+  <div class="spinner-grow text-primary " role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-secondary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-danger" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-light" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!--/.Navbar-->
+  <router-outlet></router-outlet> 
+<!-- <app-login></app-login> -->
+<!-- <app-signup></app-signup> -->
+<!-- Footer -->
+<div class="container-fluid">
+<footer class="page-footer font-small unique-color mt-5 pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">W&W CarWash</h5>
+        <p>With Our Service, you can get your car washed wherever
+          you are at your convenience. Whether it's your home,
+          salon, office or any other place, your car wash is just a few taps away.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+          <!-- Links -->
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="home">Home</a>
+            </li>
+            <li>
+              <a href="services">Services</a>
+            </li>
+            <li>
+              <a href="contact">Contact</a>
+            </li>
+            <li>
+              <a href="aboutus">About Us</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3">
+
+          <!-- Links -->
+          <h5 class="text-uppercase">Connect With Us</h5>
+
+          <div className="text-center">
+           
+           <a> <i class="fab fa-instagram ml-5 mr-3" style="font-size: 30px;color:  #DD2A7B;" ></i></a>
+           <a><i class="fab  fa-facebook-square mr-3" style="font-size: 30px; color: #ADB9D3;"></i></a>
+           <a><i class="fab  fa-twitter" style="font-size: 30px; color: #08a0e9;"></i></a>
+        </div>
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="/home"> W&WCarWash.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</div>
+<!-- Footer -->

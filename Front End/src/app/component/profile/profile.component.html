@@ -1,0 +1,215 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="my-card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="rounded-circle" src="assets/img/images.png" alt="img" />
+                    </div>
+                    <div class="col">
+                        Hello,<br>
+                        <p style="font-weight: bold;">{{user}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-card">
+                <div class="row ">
+                    <div class="col-md-8 my-order ">
+                        <mdb-icon fas icon="folder" class="cyan-text fa-lg"></mdb-icon>
+                        <span *ngIf="useri" routerLink="/myaccount/myorders" class="my-order-span font-weight-bold ">My Orders</span>
+                        <span *ngIf="admin" routerLink="/adminDashboard" class="my-order-span font-weight-bold ">My Dashboard</span>
+                        <span *ngIf="washer" routerLink="/washerDashboard" class="my-order-span font-weight-bold ">My Dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-8">
+
+            <div class="my-card1">
+
+                <div>
+                    <span class="font-weight-bold">Personal Information</span>
+                    <span *ngIf="NameFields" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
+                        (click)="onPersonalInfo()">Edit</span>
+                    <span *ngIf="!NameFields" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
+                        (click)="onPersonalInfoCan()">Cancel</span>
+                </div>
+
+
+                <form [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="md-form form-sm">
+                                <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                                <input mdbInput type="text" id="form22" class="form-control"
+                                    formControlName="firstName" />
+                                <label for="form22">FirstName</label>
+                                <mdb-error *ngIf="
+                     firstName.invalid &&
+                      (firstName.dirty || firstName.touched)
+                    ">
+                                    First Name is required
+                                </mdb-error>
+                                <mdb-success *ngIf="
+                            firstName.valid &&
+                      (firstName.dirty || firstName.touched)
+                    ">
+                                </mdb-success>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="md-form form-sm">
+                                <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                                <input mdbInput type="text" id="form23" class="form-control"
+                                    formControlName="lastName" />
+                                <label for="form23">LastName</label>
+                                <mdb-error *ngIf="
+                            lastName.invalid &&
+                              (lastName.dirty || lastName.touched)
+                            ">
+                                    Last Name is required
+                                </mdb-error>
+                                <mdb-success *ngIf="
+                            lastName.valid &&
+                              (lastName.dirty ||lastName.touched)
+                            ">
+                                </mdb-success>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-weight-bold">Email address</span>
+                        <span *ngIf="EmailField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
+                            (click)="onEmail()">Edit</span>
+                        <span *ngIf="!EmailField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
+                            (click)="onEmailCan()">Cancel</span>
+                    </div>
+                    <div class="md-form form-sm">
+                        <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
+                        <input mdbInput mdbValidate type="email" id="form24" class="form-control"
+                            formControlName="email" />
+                        <label for="form24">Email</label>
+                        <mdb-error *ngIf="
+                         email.invalid &&
+                          (email.dirty ||email.touched)
+                        ">
+                            <p *ngIf="email.errors?.required" class="text-danger">email is
+                                required</p>
+                            <p *ngIf="email.errors?.email" class="text-danger">Enter Valid
+                                email</p>
+                        </mdb-error>
+                    </div>
+
+
+                    <div>
+                        <span class="font-weight-bold">Mobile</span>
+                        <span *ngIf="MobileField" class="font-weight-bold ml-5" style="color: #1B98F5; cursor: pointer;"
+                            (click)="onMobile()">Edit</span>
+                        <span *ngIf="!MobileField" class="font-weight-bold ml-5"
+                            style="color: #1B98F5; cursor: pointer;" (click)="onMobileCan()">Cancel</span>
+                    </div>
+
+
+
+
+                    <div class="md-form form-sm">
+                        <mdb-icon fas icon="phone" class="prefix"></mdb-icon>
+                        <input mdbInput mdbValidate type="tel" id="form27" class="form-control"
+                            formControlName="phone" />
+                        <label for="form27">Phone</label>
+                        <mdb-error *ngIf="
+                        mobile.invalid &&
+                          ( mobile.dirty ||  mobile.touched)
+                        ">
+                            <p *ngIf="mobile.errors?.required" class="text-danger">Mobile is
+                                required</p>
+                            <p *ngIf="mobile.errors?.pattern" class="text-danger">Mobile
+                                number should be of 10 digits</p>
+
+                        </mdb-error>
+
+                    </div>
+                    <div formGroupName="address">
+                        <div>
+
+                            <span class="font-weight-bold">Address</span>
+                            <span *ngIf="addressField" class="font-weight-bold ml-5"
+                                style="color: #1B98F5; cursor: pointer;" (click)="onAddress()">Edit</span>
+                            <span *ngIf="!addressField" class="font-weight-bold ml-5"
+                                style="color: #1B98F5; cursor: pointer;" (click)="onAddressCan()">Cancel</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="md-form form-sm">
+                                    <mdb-icon fas icon="map-pin" class="prefix"></mdb-icon>
+                                    <input mdbInput mdbValidate type="text" id="form28" 
+                                    class="form-control"  formControlName="pincode"/>
+                                    <label for="form28">pincode</label>
+                                    <mdb-error *ngIf="pincode.invalid && (pincode.dirty ||pincode.touched)">
+                                    <p *ngIf="pincode.errors?.required" class="text-danger">pincode is required</p>
+                                    <p *ngIf="pincode.errors?.pattern" class="text-danger">pincode length should be 6 digits</p>
+                                </mdb-error>
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="md-form form-sm">
+                                    <mdb-icon fas icon="city" class="prefix"></mdb-icon>
+                                    <input mdbInput mdbValidate type="text" id="form29" 
+                                    class="form-control" formControlName="city"/>
+                                    <label for="form29">City/Town/District</label>
+                                    <!-- <mdb-error *ngIf="city.invalid && (city.dirty || city.touched)">
+                                  required
+                                </mdb-error> -->
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="md-form form-sm">
+                                    <mdb-icon fas icon="home" class="prefix"></mdb-icon>
+                                    <input mdbInput mdbValidate type="text" id="form30" class="form-control" 
+                                    formControlName="state"/>
+                                    <label for="form30">state</label>
+                                    <!-- <mdb-error *ngIf="state.invalid && (state.dirty || state.touched)">
+                                required
+                                </mdb-error> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-form form-sm">
+                            <mdb-icon fas icon="street-view" class="prefix"></mdb-icon>
+                            <input mdbInput mdbValidate type="text" id="form31" class="form-control" 
+                            formControlName="street"/>
+                            <label for="form31">Street</label>
+                            <!-- <mdb-error *ngIf="street.invalid &&(street.dirty || street.touched)">
+                             required
+                        </mdb-error> -->
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-5 ">
+                                <div class="text-center mb-5 ">
+                                    <button [disabled]="!EditForm.valid" type="submit" mdbBtn gradient="purple" block="true" rounded="true"
+                                        class="z-depth-1a waves-light" mdbWavesEffect>Save Changes
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" mdbBtn gradient="peach" block="true" rounded="true"
+                                    class="z-depth-1a waves-light" (click)="onCancel()" mdbWavesEffect>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

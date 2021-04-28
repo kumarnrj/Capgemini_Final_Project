@@ -1,0 +1,146 @@
+<div class="container mt-5 mb-5">
+    <!-- Editable table -->
+    <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Order Detials</h3>
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    
+                    <tr>
+                        <th class="text-center">Sr.No</th>
+                        <th class="text-center">Cust Name</th>
+                        <th class="text-center">Washer Name</th>
+                        <th class="text-center">WashingType</th>
+                        <th class="text-center">WashingDate</th>
+                        <th class="text-center">WashingTime</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Payment Status</th>
+                        <th  class="text-center">Update Order</th>
+                        <th class="text-center">View Details</th>
+                    </tr>
+                    
+                    <tr *ngFor="let order of orderList;let id=index" >
+                       <td>{{id+1}}</td>
+                        <td>
+                            {{order?.customerName}}
+                        </td>
+                        <td>
+                            {{order?.washerName}}
+                        </td>
+                        <td>
+                           {{order?.washingType}}
+                        </td>
+                        <td>
+                           {{order?.washingDate}}
+                        </td>
+                        <td>
+                           {{order?.time}}
+                        </td>
+                        
+                        <td>
+
+                            <ng-container [ngSwitch]=order?.status>
+                                <div *ngSwitchCase="'PENDING'">
+                                    <mdb-badge pill="true" warning="true">Pending</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'PROCESSING'">
+                                    <mdb-badge pill="true" info="true">Processing</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'COMPLETED'">
+                                    <mdb-badge pill="true" success="true">Completed</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'CANCELED'">
+                                   
+                                    <mdb-badge pill="true" danger="true">canceled</mdb-badge>
+                                    
+                                </div>
+                           </ng-container>
+                           
+                        </td>
+                        <td>
+                            <ng-container [ngSwitch]=order?.paymentStatus>
+                                <div *ngSwitchCase="'PENDING'">
+                                    <mdb-badge pill="true" warning="true">Pending</mdb-badge>
+                                </div>
+                                <div *ngSwitchCase="'PAID'">
+                                    <mdb-badge pill="true" success="true">Paid</mdb-badge>
+                                </div>
+                           </ng-container>
+                           
+                           
+                        </td>
+                        <td *ngIf="isUpdateOrderByWasher">
+                            <span class="table-up">
+                                <a class="text-success">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button *ngIf="(order?.status!=='COMPLETED')   && order?.status!=='CANCELED' " mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
+                                        <button *ngIf="(order?.status!=='COMPLETED')  && order?.status!=='CANCELED' " mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
+                                    </div>
+                                </a>
+                            </span>
+                        </td>
+                        <td *ngIf="isViewOrderByAdmin">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING' " mdbBtn type="button" color="success" class="waves-light" (click)="assignOrder(order)" mdbWavesEffect>Assign</button>
+                            </div>
+                           
+                        </td>
+                        <td *ngIf="isUpdateOrderByAdmin">
+                            
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                        <button mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
+                                        <button mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
+                                    </div>
+                               </td>
+                        <td *ngIf="isViewOrderByWasher">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING'  && order?.status!=='CANCELED' " mdbBtn type="button" color="success" class="waves-light" (click)="acceptOrder(order)" mdbWavesEffect>Accept</button>
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING'  && order?.status!=='CANCELED'  " mdbBtn type="button" color="danger" class="waves-light" (click)="rejectOrder(order)" mdbWavesEffect>Reject</button>
+                            </div>
+                           
+                        </td>
+                        <td>
+                            <a>
+                                <mdb-badge pill="true" color="teal" >
+                                <mdb-icon mdbTooltip="View Info"  fas icon="info" size="2x"></mdb-icon>
+                                </mdb-badge>
+                            </a>
+                        </td>
+                    </tr>
+               
+                </table>
+               
+            
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<!--                   modal to assign washer                                            -->
+<div mdbModal #frame="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">Assign Washer</h4>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label >Washers</label>
+                <select class="ml-4" [(ngModel)]="washer" name="washer"  >
+              
+                    <option *ngFor="let washer of washerIdList" [value]="washer._id+','+washer.firstName" >{{washer.firstName}} ( {{washer._id}} )</option>
+                </select>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="frame.hide()" mdbWavesEffect>Close</button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="UpdateWasherInBookingList()" mdbWavesEffect>Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+       
