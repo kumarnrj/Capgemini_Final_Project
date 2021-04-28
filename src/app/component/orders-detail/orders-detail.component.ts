@@ -11,7 +11,7 @@ export class OrdersDetailComponent implements OnInit {
 
   public id;
   public status='PENDING';
-  public paymentStatus=true;
+  public paymentStatus=false;
 
   OrderDetail:Orders;
   constructor(private route:ActivatedRoute,
@@ -29,6 +29,8 @@ export class OrdersDetailComponent implements OnInit {
           .subscribe(res=>{
             console.log(res)
               this.OrderDetail=res;
+              if(this.OrderDetail.status==='COMPLETED')
+                this.paymentStatus=true;
           },
           err=>console.log(err));
       },1
@@ -36,5 +38,6 @@ export class OrdersDetailComponent implements OnInit {
 
 
   }
+ 
 
 }

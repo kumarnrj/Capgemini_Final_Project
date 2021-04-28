@@ -11,10 +11,12 @@ export interface Orders{
     washingType:String,
     time:String,
     paymentStatus:String;
+    paymentId:String,
     carBrand:String,
     carModal:String,
     carNumber:String,
     address:Address,
-    phone:String
-
+    phone:String,
+    package:String,
+    amount:number
 }

@@ -1,4 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -17,11 +18,17 @@ export class AuthenticationService {
 
   private userEmail:String;
   private isUserVerified:boolean;
+  private invalid:boolean;
 
-  private _url="http://localhost:8100/authenticate";
-  private userServiceUrl="http://localhost:8100/user-service/api/"
+  private _url="http://localhost:8100/api/authenticate";
+  private userServiceUrl="http://localhost:8100/user-service/api/";
+  private bookingServiceUrl="http://localhost:8100/booking-service/api/";
+  private reviewSerivceUrl ="http://localhost:8100/review-service/api/";
+  private payementServiceUrl="http://localhost:8100/payment-service/api/";
+  private reviewServiceUrl="http://localhost:8100/review-service/api/";
+
   private testUrl="http://localhost:8081/api/";
-  private emailUrl="http://localhost:8100/email-service/sendOtp";
+  private emailUrl="http://localhost:8080/api/";
   private testEmailUrl="http://localhost:8080/sendOtp"
   private testOrderUrl="http://localhost:8082/api/"
 
@@ -38,6 +45,7 @@ export class AuthenticationService {
     return this.http.get("http://localhost:8100/user-service/api/findByEmail/neeraj.neerajkumar11@gmail.com");
   }
 
+// **************************************  User service and authentication ****************************************
   //authenticate the user
   authenticateUser(email:String,password:String){
     return  this.http.post(this._url,{
@@ -46,7 +54,7 @@ export class AuthenticationService {
      })
 }
 
-   // getting the user data 
+   // getting the user data  by email
    getUserData(email:String):Observable<UserDetails>{
      console.log("inside it");
     //  let url = "http://localhost:8081/api/findByEmail/"+email;
@@ -57,7 +65,9 @@ export class AuthenticationService {
   
    // adding or registering the user
    registerUser(user:User){
-    return this.http.post(this.testUrl+"addUser",user);
+     let url =`${this.userServiceUrl}addUser`;
+     return this.http.post(url,user);
+    // return this.http.post(this.testUrl+"addUser",user);
    }
 
    // updating the user 
@@ -69,70 +79,92 @@ export class AuthenticationService {
 
    // Deleting the user from the database based on the userId
    removeUser(userId:String){
-     return this.http.delete(`${this.testUrl}deleteUser/${userId}`);
+    let url = `${this.userServiceUrl}deleteUser/${userId}`;
+    return this.http.delete(url);
+    //  return this.http.delete(`${this.testUrl}deleteUser/${userId}`);
    }
 
 
    // getting all the users
    getAllUser():Observable<UserDetails[]>{
      console.log("inside all user")
-     return this.http.get<UserDetails[]>(this.testUrl);
-   }
+     
+     let url = `${this.userServiceUrl}allUser`;
+     return this.http.get<UserDetails[]>(url);
 
-   // send OTP to the user
-   sendOtp(email:String){
-     return this.http.post(this.testEmailUrl,{
-       email:email
-     })
-   }
-
-   // verify the otp entered by user
-   verityOtp(otp){
-     return this.http.post("http://localhost:8080/verify-otp",{
-       otp:otp
-   })
+    //  return this.http.get<UserDetails[]>(this.testUrl);
    }
 
    //to change the password
 
    changePassword(newPassword:String){
-     console.log(this.userEmail);
-    return this.http.patch(this.testUrl+"/updatePassword",{
-      email:this.userEmail,
+    let  email= localStorage.getItem("email");
+    let url = `${this.userServiceUrl}updatePassword`; 
+
+      return this.http.patch(url,{
+      email:email,
       newPassword:newPassword
     })
   }
+//**************************************************** */
+//***************************************** Email Service ********************/
+ 
+// send OTP to the user
+ sendOtp(email:String){
+  return this.http.post(`${this.emailUrl}sendOtp`,{
+    email:email
+  })
+}
 
+// verify the otp entered by user
+verityOtp(otp){
+  return this.http.post("http://localhost:8080/api/verify-otp",{
+    otp:otp
+})
+}
 
-//********************************* Order Service ****************************************** */
+//********************************* booking Service ****************************************** */
 
    // add order to databas
-   addBooking(newOrder:Orders){
-     return this.http.post(`${this.testOrderUrl}addBooking`,newOrder);
+   addBooking(newOrder:Orders):Observable<Orders>{
+     return this.http.post<Orders>(`${this.bookingServiceUrl}addBooking`,newOrder);
    }
 
    // Getting all the orders
    getAllOrders():Observable<Orders[]>{
-    return this.http.get<Orders[]>(this.testOrderUrl);
+   
+    let url =`${this.bookingServiceUrl}allBooking`;
+    return this.http.get<Orders[]>(url);
+    // return this.http.get<Orders[]>(this.testOrderUrl);
   }
   // Getting the orders list 
   getCustomerOrderList(customerId):Observable<Orders[]>{
-      return this.http.get<Orders[]>(`${this.testOrderUrl}customer/${customerId}`);
+      return this.http.get<Orders[]>(`${this.bookingServiceUrl}customer/${customerId}`);
   }
   
   // Getting order by orderId
   getOrderById(orderId:string):Observable<Orders>{
-    return this.http.get<Orders>(`${this.testOrderUrl}${orderId}`);
+    return this.http.get<Orders>(`${this.bookingServiceUrl}bookingId/${orderId}`);
   }
 
   // Getting the orders list by washerId
   getWasherOrderList(washerId):Observable<Orders[]>{
-    return this.http.get<Orders[]>(`${this.testOrderUrl}washer/${washerId}`);
+    return this.http.get<Orders[]>(`${this.bookingServiceUrl}washer/${washerId}`);
   }
 
   // update order details
-  updateOrder(order:Orders){
-    return this.http.put(`${this.testOrderUrl}updateOrder`,order);
+  updateOrder(order:any){
+    console.log("inside update ",order);
+    return this.http.put(`${this.bookingServiceUrl}updateOrder`,order);
+  }
+
+  //update payment status
+  updatePaymentStatusInBooking(payment_id,paymentStatus,orderId){
+    return this.http.put(`${this.bookingServiceUrl}updatePaymentStatus`,{
+        payment_id:payment_id,
+        paymentStatus:paymentStatus,
+        orderId:orderId
+    });
   }
 
   //************************************************************************************** */
@@ -142,12 +174,17 @@ export class AuthenticationService {
 
 // getting all the review
 getAllReview():Observable<Review[]>{
-   return this.http.get<Review[]>(`${this.testReviewUrl}allReview`);
+   return this.http.get<Review[]>(`${this.reviewSerivceUrl}allReview`);
 }
 
  // getting reviews by washer id
  getWasherReviewList(id):Observable<Review[]>{
-   return this.http.get<Review[]>(`${this.testReviewUrl}washerId/${id}`);
+   return this.http.get<Review[]>(`${this.reviewSerivceUrl}washerId/${id}`);
+ }
+
+ // add reviews
+ addReview(review){
+   return this.http.post(`${this.reviewSerivceUrl}add`,review);
  }
  
  //*********************************************************************************** */
@@ -156,15 +193,17 @@ getAllReview():Observable<Review[]>{
 
  private payemtUrl="http://localhost:8084/";
 // creating a payment order
- createPaymentOrder(payAmount){
-   return this.http.post(`${this.payemtUrl}create_order`,{
-     amount:payAmount
+ createPaymentOrder(payAmount,oId){
+
+   return this.http.post(`${this.payementServiceUrl}create_order`,{
+     amount:payAmount,
+     custOId:oId
    })
  }
 
 // updating the payment order
 updatePaymentStatus(payment_id: string, order_id: string, status: string){
-   return this.http.post(`${this.payemtUrl}update_order`, {
+   return this.http.post(`${this.payementServiceUrl}update_order`, {
     payment_id: payment_id,
     order_id: order_id,
     status: status
@@ -219,5 +258,14 @@ updatePaymentStatus(payment_id: string, order_id: string, status: string){
      this.isUserVerified = UserVerificationResponse;
    }
   
-   
+  
+
+
+  get isInvalid(){
+    return this.invalid;
+  }
+
+  setInvalid(res:boolean){
+    this.invalid = res;
+  }
 }

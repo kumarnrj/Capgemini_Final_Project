@@ -44,20 +44,18 @@ export class LoginComponent implements OnInit {
                   this.currentUser = res;
                   localStorage.setItem("id",this.currentUser._id.toString());
                   localStorage.setItem("ROLE",this.currentUser.role.toString());
-           })
-           
-           this.router.navigate(['/']); 
+           });
+           sessionStorage.setItem("login","yes");
+           this.router.navigate(['home']);
+          
     },
     err=>{
-      if(err.status==404){
-        this.errMsg = err.error + " Email or Password is wrong!"
-      }})
+      console.log("hii");
+      });
 
-      //  this.http.post("http://localhost:8100/authenticate",{
-      //    username:this.email,
-      //    password:this.password
-      //  }).toPromise().then(res=>console.log(res),
-      //                      err=>console.log(err))
+    if(this.auth.isInvalid==true){
+      this.errMsg="Wrong email or password";
+    }   
   }
 
 

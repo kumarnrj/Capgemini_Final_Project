@@ -5,6 +5,8 @@ import {ICustomWindow, WindowRefService} from '../../Services/window-ref.service
 import swal from 'sweetalert2';
 import { ActivatedRoute, Router,ParamMap } from '@angular/router';
 import { identifierModuleUrl } from '@angular/compiler';
+import { Orders } from 'src/app/Modals/Orders';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-payement-gateway',
   templateUrl: './payement-gateway.component.html',
@@ -20,6 +22,8 @@ export class PayementGatewayComponent implements OnInit {
   public extraCharges=0;
   public total=0;
   private reqId;
+  private custorderId;
+
 
   constructor(private auth:AuthenticationService,
               private route:ActivatedRoute,
@@ -33,7 +37,11 @@ export class PayementGatewayComponent implements OnInit {
   ngOnInit(): void {
          this.route.paramMap.subscribe((params:ParamMap)=>{
            this.reqId= parseInt(params.get("id"));
+           this.custorderId = params.get("oid");
+           console.log(this.custorderId);
          })
+
+         
 
          if(this.reqId==1){
            this.price=499;
@@ -59,9 +67,9 @@ export class PayementGatewayComponent implements OnInit {
 
   paymentStart() {
     console.log("payment started ", this.amount)
-    
+   
 
-    this.auth.createPaymentOrder(this.amount).subscribe((res:any) => {
+    this.auth.createPaymentOrder(this.amount,this.custorderId).subscribe((res:any) => {
       if (res.status === "created") {
         let options = {
           "key": "rzp_test_X1lxqLWC24TOBN", // Enter the Key ID generated from the Dashboard
@@ -126,6 +134,12 @@ paymentHandler(res: any) {
   updatePaymentOnServer(payment_id: string, order_id: string, status: string) {
    
     this.auth.updatePaymentStatus(payment_id,order_id,status).subscribe((res) => {
+     
+     
+      this.auth.updatePaymentStatusInBooking(payment_id,status,this.custorderId)
+      .subscribe(res=>{
+        console.log(res)
+      })
       swal.fire("Done", "Payment Successful", "success");
     },err => {
       swal.fire("Failed", "Payment not recieved if amount debuted refund will be initiated within 2 working days", "error")

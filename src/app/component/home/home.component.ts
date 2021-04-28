@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
     console.log("User is customer ",this.auth.isUserCustomer());
     console.log("User is washer",this.auth.ifUserWasher());
     console.log("User is admin ",this.auth.isUserAdmin());
+    if(sessionStorage.getItem("login")=="yes"){
+      window.location.reload();
+      sessionStorage.removeItem("login");
+    }
 
   }
 
@@ -40,7 +44,7 @@ export class HomeComponent implements OnInit {
  }
 
  api(){
-     this.http.get("http://localhost:8100/user-service/api/allUser")
+     this.http.get("http://localhost:8100/booking-service/api/allBooking")
      .toPromise().then(res=>{
        console.log(res)
      }

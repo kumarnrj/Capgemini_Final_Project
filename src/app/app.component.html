@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" href="/home">W&W</a></mdb-navbar-brand>
   
     <!-- Collapsible content -->
     <links>
@@ -40,7 +40,9 @@
               <div class="dropdown-menu dropdown-menu-right dropdown-primary">
                     <a class="dropdown-item" routerLink="/myaccount/profile">My Profile</a>
                 <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item" href="#">My Orders</a>
+                <a *ngIf="user" class="dropdown-item" (click)="onMyOrder()">My Orders</a>
+                <a *ngIf="admin" class="dropdown-item" (click)="onMyOrder()">Dashboard</a>
+                <a *ngIf="washer" class="dropdown-item" (click)="onMyOrder()">Dashboard</a>
                  <div class="divider dropdown-divider"></div>
                  
                 <span  class="logoutIcon dropdown-item" (click)="logout()"><mdb-icon  fas icon="sign-out-alt" style="color: #1B98F5;"></mdb-icon>LogOut</span> 
@@ -101,8 +103,10 @@
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns here to organize your footer content.</p>
+        <h5 class="text-uppercase">W&W CarWash</h5>
+        <p>With Our Service, you can get your car washed wherever
+          you are at your convenience. Whether it's your home,
+          salon, office or any other place, your car wash is just a few taps away.</p>
 
       </div>
       <!-- Grid column -->
@@ -157,7 +161,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    <a href="/home"> W&WCarWash.com</a>
   </div>
   <!-- Copyright -->
 

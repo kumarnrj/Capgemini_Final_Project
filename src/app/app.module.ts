@@ -30,7 +30,8 @@ import { PayementGatewayComponent } from './component/payement-gateway/payement-
 import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
-import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component'
+import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
+import { UserRatingComponent } from './component/user-rating/user-rating.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { UnauthorizedAccessComponent } from './component/unauthorized-access/una
     ServicesComponent,
     ContactUsComponent,
     AboutUsComponent,
-    UnauthorizedAccessComponent
+    UnauthorizedAccessComponent,
+    UserRatingComponent
   ],
   imports: [
     BrowserModule,

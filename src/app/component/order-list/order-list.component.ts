@@ -22,7 +22,7 @@ export class OrderListComponent implements OnInit {
   public isUpdateOrderByWasher;
   public isViewOrderByAdmin;
   public isUpdateOrderByAdmin;
-
+  public orderAssigned=true;
 
   public washer;
   public washerIdList;
@@ -77,6 +77,7 @@ export class OrderListComponent implements OnInit {
           this.auth.getWasherOrderList(this.id)
           .subscribe(res=>{
             this.orderList=res;
+            
           })
       },1)
     })
@@ -151,6 +152,7 @@ export class OrderListComponent implements OnInit {
   assignOrder(order){
     
     this.currentOrder = order;
+    this.orderAssigned= false;
     this.auth.getAllUser()
     .subscribe((res)=>{
           this.washerIdList = res.filter(user=>user.role==='ROLE_WASHER');

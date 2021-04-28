@@ -73,15 +73,15 @@
                             <span class="table-up">
                                 <a class="text-success">
                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <button mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
-                                        <button mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
+                                        <button *ngIf="(order?.status!=='COMPLETED')   && order?.status!=='CANCELED' " mdbBtn type="button" color="success" class="waves-light" (click)="orderCompleted(order)" mdbWavesEffect>Completed</button>
+                                        <button *ngIf="(order?.status!=='COMPLETED')  && order?.status!=='CANCELED' " mdbBtn type="button" color="danger" class="waves-light" (click)="orderCancel(order)" mdbWavesEffect>Reject</button>
                                     </div>
                                 </a>
                             </span>
                         </td>
                         <td *ngIf="isViewOrderByAdmin">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button mdbBtn type="button" color="success" class="waves-light" (click)="assignOrder(order)" mdbWavesEffect>Assign</button>
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING' " mdbBtn type="button" color="success" class="waves-light" (click)="assignOrder(order)" mdbWavesEffect>Assign</button>
                             </div>
                            
                         </td>
@@ -94,8 +94,8 @@
                                </td>
                         <td *ngIf="isViewOrderByWasher">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button mdbBtn type="button" color="success" class="waves-light" (click)="acceptOrder(order)" mdbWavesEffect>Accept</button>
-                                <button mdbBtn type="button" color="danger" class="waves-light" (click)="rejectOrder(order)" mdbWavesEffect>Reject</button>
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING'  && order?.status!=='CANCELED' " mdbBtn type="button" color="success" class="waves-light" (click)="acceptOrder(order)" mdbWavesEffect>Accept</button>
+                                <button *ngIf="(order?.status!=='COMPLETED') && order?.status!=='PROCESSING'  && order?.status!=='CANCELED'  " mdbBtn type="button" color="danger" class="waves-light" (click)="rejectOrder(order)" mdbWavesEffect>Reject</button>
                             </div>
                            
                         </td>

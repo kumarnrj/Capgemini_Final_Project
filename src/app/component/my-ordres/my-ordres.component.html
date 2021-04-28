@@ -17,16 +17,18 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <p> <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Package Name</p>
+                        <p> <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> Package </p>
+                        <p>{{list.package}}</p>
                     </div>
                     <div class="col">
-                        <p>Car Name</p>
-                        <small>Car Number</small>
+                        <p>{{list.carModal}}</p>
+                        <small>{{list.carNumber}}</small>
                         <br>
-                        <small>Washer: washer</small>
+                        <small>Washer: {{list.washerName}}</small>
                     </div>
                     <div class="col">
                          <p><i class="fas fa-rupee-sign"></i>Price</p>
+                         <p>{{list.amount}}</p>
                     </div>
                     <div class="col">
                         <ng-container [ngSwitch]="list.status">
@@ -39,7 +41,7 @@
                                 <small>Washer is processing the booking </small>
                             </div>
                             <div *ngSwitchCase="'COMPLETED'">
-                                <p><i class="fas fa-check-circle" style="color:green;" ></i>completed on {{list.time}}</p>
+                                <p><i class="fas fa-check-circle" style="color:green;" ></i>completed </p>
                                 <small>Your order is successfull</small>
                             </div>
                             <div *ngSwitchCase="'CANCELED'">
@@ -51,7 +53,7 @@
                             </div>
                        </ng-container>
                        
-                       <a href="#" class="text-info" ><i class="fa fa-star" aria-hidden="true"></i><strong>Rate and Review Service</strong></a>
+                       <a (click)="ratings(list)" class="text-info" ><i class="fa fa-star" aria-hidden="true"></i><strong>Rate and Review Service</strong></a>
                      
                     </div>
                 </div>    

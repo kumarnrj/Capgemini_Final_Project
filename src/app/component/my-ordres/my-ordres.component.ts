@@ -25,9 +25,11 @@ export class MyOrdresComponent implements OnInit {
  
   
   ngOnInit(): void {
+    
     setTimeout(
       ()=>{
-        this._auth.getCustomerOrderList("605247fc401b8742f82b3266")
+        let userId= localStorage.getItem("id");
+        this._auth.getCustomerOrderList(userId)
         .subscribe(res=>{
           console.log(res);
           this.ordersList=res;
@@ -45,6 +47,11 @@ export class MyOrdresComponent implements OnInit {
     //localStorage.setItem("orderId",list._id);
     this.router.navigate(["myaccount/myorders",list._id]);
 
+  }
+
+  // navigating to the ratings
+  ratings(list:Orders){
+    this.router.navigate(["ratings",{wid:list.washerId,name:list.customerName}]);
   }
  
 }

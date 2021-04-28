@@ -71,7 +71,7 @@ export class ReviewAndRatingComponent implements OnInit {
   ReviewList:Review[];
 
   ngOnInit(): void {
-    let id = localStorage.getItem("id");
+    let Userid = localStorage.getItem("id");
     this.role = localStorage.getItem("ROLE");
 
     
@@ -81,25 +81,29 @@ export class ReviewAndRatingComponent implements OnInit {
  
     //reqId==2 && this.role==='ROLE_WASHER'
     if(this.reqId==2){
-      this.auth.getWasherReviewList(id)
-      .subscribe(res=>{
-        this.ReviewList = res;
-      },
-      err=>{
-        console.log(err);
-      })
+      setTimeout(()=>{
+        this.auth.getWasherReviewList(Userid)
+        .subscribe(res=>{
+          this.ReviewList = res;
+        },
+        err=>{
+          console.log(err);
+        })
+      },1)
+    
     }
 
     // admin has requested to view order
     if(this.reqId==1){
-      this.auth.getAllReview()
-      .subscribe(res=>{
-        this.ReviewList = res;
-      },err=>{
-        console.log(err);
-      })
-    }
-
+      setTimeout(()=>{
+        this.auth.getAllReview()
+        .subscribe(res=>{
+          this.ReviewList = res;
+        },err=>{
+          console.log(err);
+        })
+      },1)
+      }
   }
 
   // show the list by incrementing by 4
@@ -116,7 +120,7 @@ export class ReviewAndRatingComponent implements OnInit {
     if(this.reqId==1){
       this.router.navigate(["adminDashboard"]);
     }
-    if(this.reqId==2){
+    if(this.reqId==2 ){
       this.router.navigate(["washerDashboard"]);
     }
     // if(this.role==='ROLE_WASHER'){

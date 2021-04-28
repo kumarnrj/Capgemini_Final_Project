@@ -13,6 +13,10 @@ import swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit {
 
+  public useri=false;
+  public admin=false;
+  public washer=false;
+
   // to display the currently loggedIn user
   public user: String;
 
@@ -51,6 +55,16 @@ export class ProfileComponent implements OnInit {
 
   // init method
   ngOnInit(): void {
+   
+    // checking the role of the user
+    let role = localStorage.getItem("ROLE");
+    if(role==="ROLE_USER")
+     this.useri= true;
+    if(role==="ROLE_ADMIN")
+      this.admin=true;
+    if(role==="ROLE_WASHER")
+     this.washer = true;
+
     setTimeout(()=>{
       this.auth.getUserData(localStorage.getItem("email"))
       .subscribe(res => {
@@ -170,7 +184,7 @@ export class ProfileComponent implements OnInit {
     this.auth.updateUser(this.EditForm.value, this.userId)
       .subscribe(res => {
         swal.fire("Done", "Data changed successfully", "info");
-        // this.reloadCurrentRoute();
+         this.reloadCurrentRoute();
       }, err => console.log(err))
   }
 

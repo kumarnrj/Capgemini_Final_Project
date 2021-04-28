@@ -16,7 +16,9 @@
                 <div class="row ">
                     <div class="col-md-8 my-order ">
                         <mdb-icon fas icon="folder" class="cyan-text fa-lg"></mdb-icon>
-                        <span routerLink="/myaccount/myorders" class="my-order-span font-weight-bold ">My Orders</span>
+                        <span *ngIf="useri" routerLink="/myaccount/myorders" class="my-order-span font-weight-bold ">My Orders</span>
+                        <span *ngIf="admin" routerLink="/adminDashboard" class="my-order-span font-weight-bold ">My Dashboard</span>
+                        <span *ngIf="washer" routerLink="/washerDashboard" class="my-order-span font-weight-bold ">My Dashboard</span>
                     </div>
                 </div>
             </div>

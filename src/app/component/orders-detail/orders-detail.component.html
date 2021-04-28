@@ -26,15 +26,39 @@
           </div>
 
           <div class="col">
-            <p>Car Name</p>
-            <small>Car Number</small>
+            <p>{{OrderDetail?.carModal}}</p>
+            <small>{{OrderDetail?.carNumber}}</small>
             <br>
-            <small>Washer: washer</small>
+            <small>Washer: {{OrderDetail?.washerName}}</small>
+            <br>
+            <small>WasherId: {{OrderDetail?.washerId}}</small>
           </div>
           <div class="col">
             <p><i class="fas fa-rupee-sign"></i>Payment status</p>
+            <ng-container [ngSwitch]="OrderDetail?.status"  >
+              <div *ngSwitchCase="'PENDING'">
+                 <p><i class="fas fa-clock  " style="color: rgb(255, 166, 0);"  ></i>Pending</p>
+                 <small>Your booking has been recieved</small>
+              </div>
+              <div *ngSwitchCase="'PROCESSING'">
+                  <p ><i class="fas fa-clock" style="color: green;" aria-hidden="true"></i>Processing</p>
+                  <small>Washer is processing the booking </small>
+              </div>
+              <div *ngSwitchCase="'COMPLETED'" >
+                  <p><i class="fas fa-check-circle" style="color:green;" ></i>completed on {{list.time}}</p>
+                  <small>Your order is successfull</small>
+              </div>
+              <div *ngSwitchCase="'CANCELED'">
+                  <p><i class="fas fa-times-circle" style="color: red;" aria-hidden="true"></i>Cancel
+                      <br>
+                      <small>Your order has been canceled</small>
+                  </p>
+                  
+              </div>
+         </ng-container>
           </div>
           <div *ngIf="paymentStatus" class="mt-5 mr-4">
+         
             <span type="button" class="text-info"><i class="fa fa-download mr-2 " aria-hidden="true"></i>
               <strong>Download Invoice</strong></span>
 
@@ -56,8 +80,8 @@
             <div class="row px-3">
               <div class="col">
                 <ul id="progressbar">
-  
-                  <ng-container [ngSwitch]="status">
+               
+                  <ng-container [ngSwitch]="OrderDetail?.status">
                     <div *ngSwitchCase="'PENDING'">
                       <li class="step0 active" id="step1">PLACED</li>
                       <li class="step0  text-center" id="step2">PROCESSING</li>

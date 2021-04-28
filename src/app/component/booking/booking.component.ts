@@ -76,7 +76,7 @@ export class BookingComponent implements OnInit {
      }
     else if(this.reqId==2){
       this.Package="GOLD";
-      this.amount=999;
+      this.amount=899;
     }
     else if(this.reqId==3){
       this.Package="PLATINUM";
@@ -183,6 +183,7 @@ get time(){
       washingType:'',
       time:'',
       paymentStatus:'',
+      paymentId:'',
       carBrand:'',
       carModal:'',
       carNumber:'',
@@ -192,7 +193,9 @@ get time(){
         state:'',
         street:''
       },
-      phone:''
+      phone:'',
+      package:'',
+      amount:0
     }
     
     this.newOrder.customerName=user.firstName+" "+user.lastName;
@@ -212,6 +215,7 @@ get time(){
 
     // case1:  washing type is now 
     if(this.washingType=='now'){
+      this.newOrder.washingType="NOW";
        this.newOrder.carModal = this.carDetailForm.value.carModel;
        this.newOrder.carNumber = this.carDetailForm.value.carNumber;
        
@@ -222,6 +226,7 @@ get time(){
         console.log(this.newOrder);
     }
      else{
+      this.newOrder.washingType="SCHEDULED";
         this.newOrder.carModal = this.carDetailForm.value.carModel;
         this.newOrder.carNumber = this.carDetailForm.value.carNumber;
         this.newOrder.washingDate =this.datepipe.transform(this.carDetailForm.value.date,"dd-MM-yyyy");
@@ -239,10 +244,12 @@ get time(){
   onChangeselect(washingType){
     this.washingType = washingType;
     if(this.washingType==='now'){
+      
       this.carDetailForm.get('date').disable();
       this.carDetailForm.get('time').disable();
     }
     else{
+      
       this.carDetailForm.get('date').enable();
       this.carDetailForm.get('time').enable();
     }
@@ -263,7 +270,11 @@ get time(){
   CODBooking(){
     // creating the order model
     this.newOrder.paymentStatus="PENDING";
-    
+    this.newOrder.paymentId="COD";
+    this.newOrder.status="PENDING";
+    this.newOrder.package=this.Package;
+    this.newOrder.amount=this.amount;
+   
     // storing the data in the dataBase;
     this.auth.addBooking(this.newOrder)
     .subscribe(res=>{
@@ -276,16 +287,20 @@ get time(){
   // handling the online booking 
   onlineBooking(){
         this.newOrder.paymentStatus="PENDING";
+        this.newOrder.status="PENDING";
+        this.newOrder.package=this.Package;
+        this.newOrder.amount=this.amount;
       // storing the data in the dataBase;
       this.auth.addBooking(this.newOrder)
-      .subscribe(res=>{
-        console.log(res);
+      .subscribe((res:any)=>{
+        console.log(res)
+       // redirecting to the payment gateway
+     this.router.navigate(["payment-gateway",{id:this.reqId,oid:res._id}]);
       },err=>{
         console.log(err);
       })
 
-     // redirecting to the payment gateway
-     this.router.navigate(["payment-gateway",{id:this.reqId}]);
+    
       
   }
 

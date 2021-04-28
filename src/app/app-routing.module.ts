@@ -24,6 +24,7 @@ import { ServicesComponent } from './component/services/services.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
+import { UserRatingComponent } from './component/user-rating/user-rating.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path:'washerDashboard',component:WasherDashboardComponent,canActivate:[roleWasher]},
   {path:'Dashboard/Orders',component:OrderListComponent,canActivate:[UserAdminOrWasher]},
   {path:'Reviews-Rating',component:ReviewAndRatingComponent,canActivate:[UserAdminOrWasher]},
+  {path:"ratings",component:UserRatingComponent,canActivate:[UserLoggedIn]},
   {path:'unauthorized',component:UnauthorizedAccessComponent},
   {path:'**',component:PageNotFoundComponent},
 ];
