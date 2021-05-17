@@ -25,12 +25,10 @@ export class AuthenticationService {
   private bookingServiceUrl="http://localhost:8100/booking-service/api/";
   private reviewSerivceUrl ="http://localhost:8100/review-service/api/";
   private payementServiceUrl="http://localhost:8100/payment-service/api/";
-  private reviewServiceUrl="http://localhost:8100/review-service/api/";
+  private emailServiceUrl="http://localhost:8100/email-service/api/";
+  private smsServiceUrl ="http://localhost:8100/sms-service/api/";
 
-  private testUrl="http://localhost:8081/api/";
-  private emailUrl="http://localhost:8080/api/";
-  private testEmailUrl="http://localhost:8080/sendOtp"
-  private testOrderUrl="http://localhost:8082/api/"
+  
 
 
   constructor(private http:HttpClient) { }
@@ -54,10 +52,16 @@ export class AuthenticationService {
      })
 }
 
+//getting the user by Id
+getUserDataById(id:String){
+  let url = `${this.userServiceUrl}userId/${id}`;
+     return  this.http.get<UserDetails>(url);
+ 
+}
+
    // getting the user data  by email
    getUserData(email:String):Observable<UserDetails>{
      console.log("inside it");
-    //  let url = "http://localhost:8081/api/findByEmail/"+email;
     let url = `${this.userServiceUrl}findByEmail/${email}`;
      return  this.http.get<UserDetails>(url);
    }
@@ -111,17 +115,27 @@ export class AuthenticationService {
  
 // send OTP to the user
  sendOtp(email:String){
-  return this.http.post(`${this.emailUrl}sendOtp`,{
+  return this.http.post(`${this.emailServiceUrl}sendOtp`,{
     email:email
   })
 }
 
 // verify the otp entered by user
-verityOtp(otp){
-  return this.http.post("http://localhost:8080/api/verify-otp",{
-    otp:otp
+verityOtp(otp,email){
+  return this.http.post(`${this.emailServiceUrl}verify-otp`,{
+    otp:otp,
+    email:email
 })
 }
+
+//****************************  sms-service *******************************
+sendNotification(number:String,msg:String){
+  return this.http.post(`${this.smsServiceUrl}order-notification`,{
+    number:number,
+    msg:msg
+  })
+}
+
 
 //********************************* booking Service ****************************************** */
 

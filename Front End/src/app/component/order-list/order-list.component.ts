@@ -114,6 +114,10 @@ export class OrderListComponent implements OnInit {
     this.auth.updateOrder(order)
     .subscribe(res=>{
       console.log(res);
+      this.auth.sendNotification(order.phone,"Your Order is Processing by the washer. For more Details kindly visit the website")
+      .subscribe(res=>{
+        swal.fire("Done","Sent Notification to the customer","success");
+      })
     })
   }
 
@@ -134,6 +138,10 @@ export class OrderListComponent implements OnInit {
     order.paymentStatus="PAID";
     this.auth.updateOrder(order)
     .subscribe(res=>{
+      this.auth.sendNotification(order.phone,"Your Order is completed.kindly  share your feedback by visiting  the website")
+      .subscribe(res=>{
+        swal.fire("Done","Sent Notification to the customer","success");
+      })
       console.log(res);
     })
   }
@@ -176,7 +184,15 @@ export class OrderListComponent implements OnInit {
     this.auth.updateOrder(this.currentOrder)
     .subscribe(res=>{
       console.log(res);
-      swal.fire("Done","Washer Assigned Successfully","success")
+      swal.fire("Done","Washer Assigned Successfully","success");
+      this.auth.getUserDataById(washerId).subscribe(res=>{
+            let washerDetail:UserDetails;
+            washerDetail = res;
+            this.auth.sendNotification(washerDetail.phone,"You have assigned a new order kindly check your profile")
+            .subscribe(res=>{
+              console.log(res);
+            })
+      })
       this.modal.hide();
     },
     err=>{

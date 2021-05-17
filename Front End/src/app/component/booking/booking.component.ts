@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Orders } from 'src/app/Modals/Orders';
 import { UserDetails } from 'src/app/Modals/UserDetails';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-booking',
@@ -279,6 +280,12 @@ get time(){
     this.auth.addBooking(this.newOrder)
     .subscribe(res=>{
       console.log(res);
+      this.auth.sendNotification(this.newOrder.phone,"Your Order have Been placed. For more Details kindly visit the website")
+      .subscribe(res=>{
+        console.log(res);
+      })
+      swal.fire("Done","Order Placed Successfully","success");
+      this.router.navigate(["home"]);
     },err=>{
       console.log(err);
     })
@@ -293,7 +300,14 @@ get time(){
       // storing the data in the dataBase;
       this.auth.addBooking(this.newOrder)
       .subscribe((res:any)=>{
-        console.log(res)
+        console.log(res);
+        
+        //sending notification to customer
+        this.auth.sendNotification(this.newOrder.phone,"Your Order have Been placed. For more Details kindly visit the website")
+        .subscribe(res=>{
+          console.log(res)
+        });
+        
        // redirecting to the payment gateway
      this.router.navigate(["payment-gateway",{id:this.reqId,oid:res._id}]);
       },err=>{

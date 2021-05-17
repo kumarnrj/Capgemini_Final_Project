@@ -21,7 +21,10 @@ export class LoaderInterceptorService implements HttpInterceptor {
     
     // excluded the url
     const re = "/authenticate";
-    if(req.url.search(re)===-1){
+    const re1 ="/user-service/api/addUser";
+    const re2 = "/user-service/api/findByEmail/";
+    const re4 = '/email-service/api/';
+    if(req.url.search(re2)===-1 && req.url.search(re)===-1 && req.url.search(re1)===-1 && req.url.search(re4)===-1 ){
       req = req.clone({
         setHeaders:{
           Authorization:'Bearer '+t
@@ -49,12 +52,12 @@ export class LoaderInterceptorService implements HttpInterceptor {
                   swal.fire("Oops","Wrong Username or Password","error");
 
                   break;
-                case 401:      //login
+                case 401:      
                  
                   console.log("401");
                   handled = true;
                   break;
-                case 403:     //forbidden
+                case 403:     
                 
                   console.log(`403`);
                   handled = true;

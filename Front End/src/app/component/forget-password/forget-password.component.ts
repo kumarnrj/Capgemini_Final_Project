@@ -1,6 +1,7 @@
 import { HIGH_CONTRAST_MODE_ACTIVE_CSS_CLASS } from '@angular/cdk/a11y/high-contrast-mode/high-contrast-mode-detector';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 import { AuthenticationService } from '../../Services/authentication.service';
 
 @Component({
@@ -20,12 +21,18 @@ export class ForgetPasswordComponent implements OnInit {
 
   SendOtp(){
     console.log(this.email);
-       this.auth.sendOtp(this.email)
-       .subscribe(res=>{
-         this.auth.setUserEmail(this.email);
-          this.router.navigate(["verify"]);
-       },
-       err=>console.log(err))
+      this.auth.getUserData(this.email)
+      .subscribe(res=>{
+        this.auth.sendOtp(this.email)
+        .subscribe(res=>{
+          this.auth.setUserEmail(this.email);
+           
+        },
+        err=>console.log(err))
+      },err=>{
+        swal.fire("Oops","Email Not Found","error");
+      })
+      this.router.navigate(["verify",{id:this.email}]); 
   }
 
 }

@@ -16,6 +16,10 @@ export class AdminDashboardComponent implements OnInit {
               private auth:AuthenticationService) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("login")=="yes"){
+      window.location.reload();
+      sessionStorage.removeItem("login");
+    }
   }
  
   myProfile(){

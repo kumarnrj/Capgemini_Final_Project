@@ -140,6 +140,7 @@ paymentHandler(res: any) {
       .subscribe(res=>{
         console.log(res)
       })
+      
       swal.fire("Done", "Payment Successful", "success");
     },err => {
       swal.fire("Failed", "Payment not recieved if amount debuted refund will be initiated within 2 working days", "error")

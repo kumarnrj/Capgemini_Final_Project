@@ -13,6 +13,10 @@ export class WasherDashboardComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("login")=="yes"){
+      window.location.reload();
+      sessionStorage.removeItem("login");
+    }
   }
 
   // view orders

@@ -76,7 +76,7 @@ export class SignupComponent implements OnInit {
  }
 
  verifyOtp(){
-   this.auth.verityOtp(this.otp).subscribe(res=>{
+   this.auth.verityOtp(this.otp,this.registrationForm.value.email).subscribe(res=>{
      swal.fire("Done","Verified","success");
     this.auth.registerUser(this.registrationForm.value).subscribe(res=>{
       console.log(res)
