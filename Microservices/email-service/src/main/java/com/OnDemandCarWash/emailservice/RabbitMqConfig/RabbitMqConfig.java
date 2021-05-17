@@ -7,12 +7,13 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import  com.OnDemandCarWash.emailservice.EmailController.*;
 
 @Configuration
 public class RabbitMqConfig {
-    public static  final String EXCHANGE="session_exchange";
-    public static  final String QUEUE="session_queue";
-    public static  final String ROUTING_KEY="session_routingkey";
+    public static   String EXCHANGE="session_exchange";
+    public static  String QUEUE="session_queue";
+    public static   String ROUTING_KEY="session_routingKey";
 
     @Bean
     public Queue queue(){
@@ -37,6 +38,7 @@ public class RabbitMqConfig {
 
     @Bean
     public AmqpTemplate template(ConnectionFactory connectionFactory){
+
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(converter());
         return rabbitTemplate;

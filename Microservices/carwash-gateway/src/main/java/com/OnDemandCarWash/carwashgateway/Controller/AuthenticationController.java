@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-
+@CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class AuthenticationController {
 
 
@@ -55,8 +56,6 @@ public class AuthenticationController {
         final String jwt= jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
-
-
 
     }
 }

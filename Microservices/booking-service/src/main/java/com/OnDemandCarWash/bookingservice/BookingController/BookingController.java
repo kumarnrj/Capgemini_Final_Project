@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -22,7 +23,7 @@ public class BookingController {
     BookingService bookingService;
 
 // Getting all the order from the database a list
-    @GetMapping("/")
+    @GetMapping("/allBooking")
     public ResponseEntity<?> getAllBooking(){
         List<Booking> bookingList = bookingService.getAllBooking();
         if(bookingList.isEmpty()){
@@ -33,7 +34,7 @@ public class BookingController {
     }
 
 // getting the order details based on orderId
-    @GetMapping("/{bookingId}")
+    @GetMapping("/bookingId/{bookingId}")
     public  ResponseEntity<?> getBookingDetailsByBookingId(@PathVariable String  bookingId){
 
         Booking booking=bookingService.getBookingById(bookingId);
@@ -73,6 +74,7 @@ public class BookingController {
 // updating the Order status
     @PutMapping ("/updateOrder")
     public ResponseEntity<?> updateOrderDetails(@RequestBody Booking booking){
+        System.out.println(booking);
         boolean flag = bookingService.updateOrder(booking);
 
         //checking if the data succesfully updated in the database
@@ -82,5 +84,14 @@ public class BookingController {
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                     new ErrorDetails(new Date(),"INTERNAL_SERVER_ERROR","Something went wrong")
             );
+    }
+
+    @PutMapping("/updatePaymentStatus")
+    public ResponseEntity<?> updatePaymentStatus(@RequestBody Map<String,Object> orderDetails){
+        String paymentStatus=orderDetails.get("paymentStatus").toString();
+        String paymentId= orderDetails.get("payment_id").toString();
+        String orderId = orderDetails.get("orderId").toString();
+        Booking updatedBooking = bookingService.updatePaymentStatus(paymentId,paymentStatus,orderId);
+        return ResponseEntity.ok(updatedBooking);
     }
 }

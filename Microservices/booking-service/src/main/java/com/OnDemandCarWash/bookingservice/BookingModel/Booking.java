@@ -17,31 +17,64 @@ public class Booking {
     private String washerName;
     private String washerId;
     private String status="PENDING";
+    private String phone;
     private String washingDate;
     private String time;
     private  String washingType;
     private String carModal;
     private String carNumber;
     private String paymentStatus;
+    private String paymentId;
     private Address address;
+    private String Package;
+    private long amount;
+
 
 
     public Booking(){}
 
-    public Booking(String _id, String customerName, String customerId, String washerName, String washerId, String status, String washingDate, String time, String washingType, String carModal, String carNumber, String paymentStatus, Address address) {
+    public Booking(String _id, String customerName, String customerId, String washerName, String washerId, String status, String phone, String washingDate, String time, String washingType, String carModal, String carNumber, String paymentStatus, String paymentId, Address address, String aPackage, long amount) {
         this._id = _id;
         this.customerName = customerName;
         this.customerId = customerId;
         this.washerName = washerName;
         this.washerId = washerId;
         this.status = status;
+        this.phone = phone;
         this.washingDate = washingDate;
         this.time = time;
         this.washingType = washingType;
         this.carModal = carModal;
         this.carNumber = carNumber;
         this.paymentStatus = paymentStatus;
+        this.paymentId = paymentId;
         this.address = address;
+        Package = aPackage;
+        this.amount = amount;
+    }
+
+    public String getPackage() {
+        return Package;
+    }
+
+    public void setPackage(String aPackage) {
+        Package = aPackage;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String get_id() {
@@ -139,6 +172,14 @@ public class Booking {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
     public Address getAddress() {

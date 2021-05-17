@@ -6,6 +6,7 @@ import com.OnDemandCarWash.bookingservice.BookingModel.Booking;
 import com.OnDemandCarWash.bookingservice.BookingRepository.BookingRepo;
 import com.OnDemandCarWash.bookingservice.Exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class BookingService {
     }
 
     public boolean updateOrder(Booking updatedBooking) {
+        System.out.println(updatedBooking);
 
         Optional<Booking> existsBooking = bookingRepo.findById(updatedBooking.get_id());
         existsBooking.orElseThrow(()->new ResourceNotFoundException("Booking with booking id: "+updatedBooking.get_id()+" not found"));
@@ -84,6 +86,14 @@ public class BookingService {
              updatedBooking.setWashingType(existingBooking.getCarNumber());
           if(updatedBooking.getPaymentStatus()==null)
               updatedBooking.setPaymentStatus(existingBooking.getPaymentStatus());
+          if(updatedBooking.getPaymentStatus()==null)
+              updatedBooking.setPaymentStatus(existingBooking.getPaymentStatus());
+
+          if(updatedBooking.getPackage()==null)
+              updatedBooking.setPackage(existingBooking.getPackage());
+
+          if(updatedBooking.getAmount()==0)
+               updatedBooking.setAmount(existingBooking.getAmount());
 
           if(updatedBooking.getAddress()==null){
                Address address = new Address();
@@ -101,5 +111,16 @@ public class BookingService {
           }
         bookingRepo.save(updatedBooking);
         return true;
+    }
+
+    public Booking updatePaymentStatus(String paymentId, String paymentStatus, String orderId) {
+        Optional<Booking> existsBooking = bookingRepo.findById(orderId);
+        existsBooking.orElseThrow(()->new ResourceNotFoundException("Booking with booking id: "+orderId+" not found"));
+
+        Booking updateBooking = existsBooking.get();
+        updateBooking.setPaymentStatus(paymentStatus);
+        updateBooking.setPaymentId(paymentId);
+        bookingRepo.save(updateBooking);
+        return  updateBooking;
     }
 }

@@ -1,5 +1,6 @@
 package com.OnDemandCarWash.emailservice.Service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -10,26 +11,44 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
+    // variable for gmail host
+    @Value("${email.host}")
+    private String host;
+
+    // important properties
+    @Value("${smtp.port}")
+    private  String port;
+
+    @Value("${smtp.ssl.enable}")
+    private  String sslEnable;
+
+    @Value("${smtp.auth}")
+    private String auth;
+
+    @Value("${sender.email}")
+    private String email;
+
+    @Value("${sender.password}")
+    private String password;
+
+
     public boolean sendEmail(String to, String msg, String subject, String from)  {
 
-
-        // variable for gmail host
-        String host = "smtp.gmail.com";
 
         // get the system properties
         Properties properties = System.getProperties();
 
         //setting important information to propeties object
         properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.ssl.enable", sslEnable);
+        properties.put("mail.smtp.auth", auth);
 
         //step 1: to get the session object
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("neeraj.neerajkumar425@gmail.com", "neerajkumar123");
+                return new PasswordAuthentication(email, password);
             }
         });
 
